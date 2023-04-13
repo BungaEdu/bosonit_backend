@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/block1-process-file-and-streams/pom.xml" />
         <option value="$PROJECT_DIR$/block3-maven-package/pom.xml" />
+        <option value="$PROJECT_DIR$/block3-create-repo-git/pom.xml" />
       </list>
     </option>
   </component>
