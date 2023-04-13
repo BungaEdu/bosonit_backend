@@ -3,5 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/block1-process-file-and-streams/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block1-process-file-and-streams/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/block3-maven-package/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/block3-maven-package/src/main/resources" charset="UTF-8" />
   </component>
 </project>
