@@ -13,31 +13,32 @@ public class Main {
 
     public static void main(String[] args) {
         String nameCsv = "block1-process-file-and-streams\\src\\main\\resources\\people.csv";
+        String separador = "\n///////////////////////////////////////////\n";
         try {
             List<Person> people = readCsv(nameCsv);
             System.out.println("People age > 25:");
             filterPeople(people, p -> p.getAge() > 0 && p.getAge() < 25)
                     .forEach(p -> System.out.println("Name: " + p.getName() + ". Town: " + p.getTown() + ". Age: " + p.getAge()));
-            System.out.println();
+            System.out.println(separador);
 
             System.out.println("People nombre empieza por A:");
             filterPeople(people, p -> !p.getName().startsWith("A"))
                     .forEach(p -> System.out.println("Name: " + p.getName() + ". Town: " + p.getTown() + ". Age: " + p.getAge()));
-            System.out.println();
+            System.out.println(separador);
 
             System.out.println("People town = Madrid:");
             people.stream()
                     .filter(p -> p.getTown().equals("Madrid"))
                     .findFirst()
                     .ifPresent(p -> System.out.println("Name: " + p.getName() + ". Town: " + p.getTown() + ". Age: " + p.getAge()));
-            System.out.println();
+            System.out.println(separador);
 
             System.out.println("Primera persona de People con Town = Barcelona:");
             people.stream()
                     .filter(p -> p.getTown().equals("Barcelona"))
                     .findFirst()
                     .ifPresent(p -> System.out.println("Name: " + p.getName() + ". Town: " + p.getTown() + ". Age: " + p.getAge()));
-            System.out.println();
+            System.out.println(separador);
 
         } catch (IOException | InvalidLineFormatException e) {
             System.err.println("Error del documento: " + e.getMessage());
@@ -60,6 +61,7 @@ public class Main {
         List<Person> people = new ArrayList<>();
         BufferedReader reader = Files.newBufferedReader(Paths.get(filename));
         String line;
+        //Este bucle es para leer to-do el archivo
         while ((line = reader.readLine()) != null) {
             try {
                 String[] fields = line.split(":");
@@ -73,16 +75,18 @@ public class Main {
             } catch (Exception e) {
                 // No he conseguido trabajar con la excepción
                 //throw new InvalidLineFormatException(line, e);
-                System.out.println("prueba");
+                System.out.println("Error: formato introducido incorrecto");
             }
         }
         return people;
     }
 
+    //Defino una clase con un sólo método, que me dirá si se cumple la condición o no
     public interface PersonFilter {
         boolean test(Person p);
     }
 
+    //He utilizado un método para poder lanzar al crear filtros.
     public static List<Person> filterPeople(List<Person> people, PersonFilter filter) {
         return people.stream()
                 .filter(filter::test)
