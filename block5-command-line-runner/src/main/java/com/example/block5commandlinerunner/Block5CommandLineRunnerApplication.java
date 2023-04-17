@@ -21,18 +21,19 @@ public class Block5CommandLineRunnerApplication implements CommandLineRunner {
 		System.out.println("Hola desde clase secundaria");
 	}
 
-	public void tercerMensaje () {
-		System.out.println("Soy la tercera clase");
+	public void tercerMensaje (String mensaje) {
+		System.out.println(mensaje);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		segundoMensaje();
-		tercerMensaje();
+		tercerMensaje("Prueba1MensajePorPantalla");
 	}
 
-	/*Los mensajes se muestran dependiendo del orden
-	de ejecución que le ponga en el run al sobreescribirlo
+	/*Los mensajes se muestran primero el postconstruc y después
+	dependiendo del orden de ejecución que le ponga en el run
+	al sobreescribirlo
 	 */
 
 }
