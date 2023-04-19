@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: ${PROFILE:LOCAL}
+
+bd:
+  url: localhost:5432

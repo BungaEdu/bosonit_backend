@@ -1,20 +1,22 @@
 package com.example.block5profiles;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Block5ProfilesApplication {
+public class Main implements CommandLineRunner{
 
-    @Value("${animal}")
-    public String profile;
+    @Value("${bd.url}")
+    public String bdURL;
 
     public static void main(String[] args) {
-        SpringApplication.run(Block5ProfilesApplication.class, args);
+        SpringApplication.run(Main.class, args);
     }
 
+    @Override
     public void run(String... args) throws Exception {
-        System.out.println("El valor de la url es: " + profile);
+        System.out.println(bdURL);
     }
 }

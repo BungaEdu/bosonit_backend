@@ -1,2 +1,2 @@
-animal: gato
-bd.url: localhost:5432
+bd:
+  url: pro.localhost:5432
