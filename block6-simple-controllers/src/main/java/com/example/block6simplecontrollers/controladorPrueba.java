@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class controladorPrueba {
-    String nombre;
+    String nombre = "Edu";
 
     @RequestMapping("/")
     @GetMapping(value = "/users/{nombre}")

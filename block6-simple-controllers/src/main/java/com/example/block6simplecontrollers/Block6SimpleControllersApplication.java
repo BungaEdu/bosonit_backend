@@ -9,7 +9,6 @@ public class Block6SimpleControllersApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Block6SimpleControllersApplication.class, args);
-		//System.out.println("Hola desde main");
 	}
 
 }
