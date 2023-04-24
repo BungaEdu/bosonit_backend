@@ -8,12 +8,21 @@ import org.springframework.web.bind.annotation.*;
 public class Controlador1 {
     @Autowired
     PersonaService personaService;
+
     @GetMapping(value = "/addPersona")
     ///controlador1/addPersona
 
-    public Persona addPersona(@RequestHeader String name,
-                        @RequestHeader String poblacion,
-                        @RequestHeader int edad) {
-        return personaService.crearPersona(name, poblacion, edad);
+    public Persona addPersona(@RequestHeader String nombre,
+                              @RequestHeader String poblacion,
+                              @RequestHeader int edad) {
+        return personaService.crearPersona(nombre, poblacion, edad);
+    }
+
+    @Autowired
+    CiudadService ciudadService;
+
+    @PostMapping(value = "/addCiudad")
+    public Ciudad addCiudad(@RequestBody Ciudad ciudad) {
+        return ciudadService.addCiudad(ciudad);
     }
 }

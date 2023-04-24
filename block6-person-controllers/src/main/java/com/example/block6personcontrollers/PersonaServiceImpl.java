@@ -6,7 +6,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public Persona crearPersona(String nombre, String poblacion, int edad) {
         Persona persona = new Persona();
-        persona.setName(nombre);
+        persona.setNombre(nombre);
         persona.setCiudad(poblacion);
         persona.setEdad(edad);
         return persona;
