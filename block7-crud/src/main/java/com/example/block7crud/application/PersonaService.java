@@ -5,9 +5,7 @@ import com.example.block7crud.controller.dto.PersonaOutputDto;
 
 public interface PersonaService {
     PersonaOutputDto addPersona(PersonaOutputDto persona);
-
     PersonaOutputDto addPersona(PersonaInputDto persona);
-
     PersonaOutputDto getPersonaById(int id);
     void deletePersonaById( int id);
     Iterable<PersonaOutputDto> getAllPersonas(int pageNumber, int pageSize);
