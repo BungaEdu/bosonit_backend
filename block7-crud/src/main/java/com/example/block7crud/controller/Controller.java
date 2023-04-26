@@ -52,10 +52,21 @@ public class Controller {
         return personaService.getAllPersonas(pageNumber, pageSize);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@RequestBody PersonaInputDto persona) {
+/*    @PutMapping("/{id}")
+    public ResponseEntity<PersonaOutputDto> updatePersona(@PathVariable int id, @RequestBody PersonaInputDto persona) {
         try {
             personaService.getPersonaById(persona.getId());
+            return  ResponseEntity.ok().body(personaService.addPersona(persona));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonaOutputDto> updatePersona(@PathVariable int id, @RequestBody PersonaInputDto persona) {
+        try {
+            personaService.getPersonaById(id);
+            persona.setId(id);
             return  ResponseEntity.ok().body(personaService.addPersona(persona));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
