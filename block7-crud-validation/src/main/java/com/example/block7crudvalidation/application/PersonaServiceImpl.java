@@ -1,18 +1,19 @@
-package com.example.block7crud.application;
+package com.example.block7crudvalidation.application;
 
-import com.example.block7crud.controller.dto.PersonaInputDto;
-import com.example.block7crud.controller.dto.PersonaOutputDto;
-import com.example.block7crud.domain.Persona;
-import com.example.block7crud.repository.PersonaRepository;
+import com.example.block7crudvalidation.controller.dto.PersonaInputDto;
+import com.example.block7crudvalidation.controller.dto.PersonaOutputDto;
+import com.example.block7crudvalidation.domain.Persona;
+import com.example.block7crudvalidation.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class PersonaServiceImpl implements PersonaService{
+public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
+
     @Override
     public PersonaOutputDto addPersona(PersonaInputDto persona) {
         return personaRepository.save(new Persona(persona)).personaToPersonaOutputDto();
@@ -23,11 +24,12 @@ public class PersonaServiceImpl implements PersonaService{
         return personaRepository.findById(id).orElseThrow()
                 .personaToPersonaOutputDto();
     }
+
     @Override
     public PersonaOutputDto getPersonaByNombre(String nombre) {
-        return personaRepository.findByNombre(nombre).orElseThrow()
-                .personaToPersonaOutputDto();
+        return (PersonaOutputDto) personaRepository.findByUsuario(nombre).orElseThrow();
     }
+
 
     @Override
     public void deletePersonaById(int id) {
@@ -44,16 +46,16 @@ public class PersonaServiceImpl implements PersonaService{
     }
 
     @Override
-    public PersonaOutputDto updatePersona(PersonaInputDto persona,int id) {
+    public PersonaOutputDto updatePersona(PersonaInputDto persona, int id) {
         Persona personaAct = personaRepository.findById(id).orElseThrow();
-        if (persona.getNombre() != null) {
-            personaAct.setNombre(persona.getNombre());
+        if (persona.getUsuario() != null) {
+            personaAct.setUsuario(persona.getUsuario());
         }
-        if (persona.getEdad() != 0) {
-            personaAct.setEdad(persona.getEdad());
+        if (persona.getName() != null) {
+            personaAct.setName(persona.getName());
         }
-        if (persona.getPoblacion() != null) {
-            personaAct.setPoblacion(persona.getPoblacion());
+        if (persona.getSurname() != null) {
+            personaAct.setSurname(persona.getSurname());
         }
         return personaRepository.save(personaAct).personaToPersonaOutputDto();
     }
