@@ -1,3 +1,14 @@
+/*
+
+#############################################################################################################
+#############################################################################################################
+#################################                                           #################################
+#################################  CÓDIGO OBSOLETO, PARA PRUEBAS Y APUNTES  #################################
+#################################                                           #################################
+#############################################################################################################
+#############################################################################################################
+
+
 package com.example.block7crud.controller;
 
 import com.example.block7crud.application.PersonaServiceImpl;
@@ -52,25 +63,15 @@ public class Controller {
         return personaService.getAllPersonas(pageNumber, pageSize);
     }
 
-/*    @PutMapping("/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@PathVariable int id, @RequestBody PersonaInputDto persona) {
-        try {
-            personaService.getPersonaById(persona.getId());
-            return  ResponseEntity.ok().body(personaService.addPersona(persona));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
-
     @PutMapping("/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@PathVariable int id, @RequestBody PersonaInputDto persona) {
+    public ResponseEntity<PersonaOutputDto> updatePersona(@RequestBody PersonaInputDto persona, @PathVariable int id) {
         try {
-            personaService.getPersonaById(id);
-            persona.setId(id);
+            personaService.updatePersona(persona, id);
             return  ResponseEntity.ok().body(personaService.addPersona(persona));
-        } catch (EntityNotFoundException e) {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
 
 }
+*/
