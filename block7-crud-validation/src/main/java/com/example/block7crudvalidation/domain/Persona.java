@@ -19,28 +19,28 @@ import java.util.Date;
 public class Persona {
     @Id
     @GeneratedValue
-    int id;
+    private int id;
     //not null max-length:10min-length:6]
-    String usuario;
+    private String usuario;
     //not null]
-    String password;
+    private String password;
     //not null]
-    String name;
-    String surname;
+    private String name;
+    private String surname;
     //not null]
-    String companyEmail;
+    private String companyEmail;
     //not null]
-    String personalEmail;
+    private String personalEmail;
     //not null]
-    String city;
+    private String city;
     //[not null]
-    boolean active;
+    private boolean active;
     //not null]
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    Date createdDate;
-    String imagenUrl;
+    private Date createdDate;
+    private String imagenUrl;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    Date terminationDate;
+    private Date terminationDate;
 
     public Persona(PersonaInputDto personaInputDto) {
         this.id = personaInputDto.getId();
@@ -51,7 +51,7 @@ public class Persona {
         this.companyEmail = personaInputDto.getCompanyEmail();
         this.personalEmail = personaInputDto.getPersonalEmail();
         this.city = personaInputDto.getCity();
-        this.active = personaInputDto.isActive();
+        this.active = personaInputDto.getActive();
         this.createdDate = personaInputDto.getCreatedDate();
         this.imagenUrl = personaInputDto.getImagenUrl();
         this.terminationDate = personaInputDto.getTerminationDate();

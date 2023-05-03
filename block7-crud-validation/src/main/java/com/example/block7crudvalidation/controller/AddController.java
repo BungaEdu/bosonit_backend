@@ -19,7 +19,7 @@ public class AddController {
     PersonaServiceImpl personaService;
 
     @PostMapping
-    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) {
+    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) throws Exception{
         URI location = URI.create("/persona");
         return ResponseEntity.created(location).body(personaService.addPersona(persona));
     }

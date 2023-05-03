@@ -11,25 +11,18 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonaOutputDto {
-    int id;
-    //not null max-length:10min-length:6]
-    String usuario;
-    //not null]
-    String password;
-    //not null]
-    String name;
-    String surname;
-    //not null]
-    String companyEmail;
-    //not null]
-    String personalEmail;
-    //not null]
-    String city;
-    //[not null]
-    boolean active;
-    //not null]
+    private int id;
+    private String usuario = "";
+    private String password;
+    private String name;
+    private String surname;
+    private String companyEmail;
+    private String personalEmail;
+    private String city;
+    private boolean active;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    Date createdDate;
-    String imagenUrl;
-    Date terminationDate;
+    private Date createdDate;
+    private String imagenUrl;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
+    private Date terminationDate;
 }

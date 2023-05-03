@@ -14,7 +14,7 @@ public class UpdateController {
     PersonaServiceImpl personaService;
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@RequestBody PersonaInputDto Persona, @PathVariable int id) {
+    public ResponseEntity<PersonaOutputDto> updatePersona(@RequestBody PersonaInputDto Persona, @PathVariable int id) throws Exception{
         personaService.updatePersona(Persona, id);
         return ResponseEntity.ok().body(personaService.getPersonaById(id));
     }

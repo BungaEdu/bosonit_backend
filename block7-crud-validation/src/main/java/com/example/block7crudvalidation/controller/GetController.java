@@ -21,10 +21,10 @@ public class GetController {
         }
     }
 
-    @GetMapping("nombre/{nombre}")
-    public ResponseEntity<PersonaOutputDto> getPersonaByNombre(@PathVariable String nombre) {
+    @GetMapping("usuario/{usuario}")
+    public ResponseEntity<PersonaOutputDto> getPersonaByUsuario(@PathVariable String Usuario) {
         try {
-            return ResponseEntity.ok().body(personaService.getPersonaByNombre(nombre));
+            return ResponseEntity.ok().body(personaService.getPersonaByUsuario(Usuario));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
