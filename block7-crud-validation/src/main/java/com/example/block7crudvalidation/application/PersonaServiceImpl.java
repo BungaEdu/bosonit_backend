@@ -3,6 +3,8 @@ package com.example.block7crudvalidation.application;
 import com.example.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.example.block7crudvalidation.controller.dto.PersonaOutputDto;
 import com.example.block7crudvalidation.domain.Persona;
+import com.example.block7crudvalidation.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -69,47 +71,47 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaOutputDto updatePersona(PersonaInputDto persona, int id) throws Exception {
+    public PersonaOutputDto updatePersona(PersonaInputDto persona, int id) throws EntityNotFoundException, UnprocessableEntityException {
         Persona personaAct = personaRepository.findById(id).orElseThrow();
-        if (persona.getUsuario() != null || persona.getUsuario().length() >= 6 || persona.getUsuario().length() >= 10) {
+        if (persona.getUsuario() != null || persona.getUsuario().length() >= 6 || persona.getUsuario().length() <= 10) {
             personaAct.setUsuario(persona.getUsuario());
         } else {
-            throw new Exception("Usuario introducido erróneo, no cumple las condiciones");
+            throw new UnprocessableEntityException();
         }
         if (persona.getPassword() != null) {
             personaAct.setPassword(persona.getPassword());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Password no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getName() != null) {
             personaAct.setName(persona.getName());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Name no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCompanyEmail() != null) {
             personaAct.setCompanyEmail(persona.getCompanyEmail());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Company Email no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getPersonalEmail() != null) {
             personaAct.setPersonalEmail(persona.getPersonalEmail());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Personal Email no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCity() != null) {
             personaAct.setCity(persona.getCity());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo City no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getActive() != null) {
             personaAct.setActive(persona.getActive());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Active no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCreatedDate() != null) {
             personaAct.setCreatedDate(persona.getCreatedDate());
         } else {
-            throw new Exception("Usuario introducido erróneo, el campo Created Date no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         personaAct.setImagenUrl(persona.getImagenUrl());
         personaAct.setTerminationDate(persona.getTerminationDate());

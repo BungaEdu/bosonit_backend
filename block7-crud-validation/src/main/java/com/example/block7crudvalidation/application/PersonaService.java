@@ -2,6 +2,8 @@ package com.example.block7crudvalidation.application;
 
 import com.example.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.example.block7crudvalidation.controller.dto.PersonaOutputDto;
+import com.example.block7crudvalidation.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.exceptions.UnprocessableEntityException;
 
 public interface PersonaService {
     PersonaOutputDto addPersona(PersonaInputDto persona) throws Exception;
@@ -14,6 +16,6 @@ public interface PersonaService {
 
     PersonaOutputDto getPersonaByUsuario(String usuario);
 
-    PersonaOutputDto updatePersona(PersonaInputDto persona, int id) throws Exception;
+    PersonaOutputDto updatePersona(PersonaInputDto persona, int id) throws EntityNotFoundException, UnprocessableEntityException;
 }
 
