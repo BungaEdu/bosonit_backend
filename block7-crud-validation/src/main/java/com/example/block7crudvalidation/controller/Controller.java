@@ -21,7 +21,7 @@ public class Controller {
     PersonaServiceImpl personaService;
 
     @PostMapping
-    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) throws Exception{
+    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) throws EntityNotFoundException, UnprocessableEntityException{
         URI location = URI.create("/persona");
         return ResponseEntity.created(location).body(personaService.addPersona(persona));
     }

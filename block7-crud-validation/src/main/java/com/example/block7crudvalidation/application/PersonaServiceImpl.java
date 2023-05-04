@@ -42,30 +42,30 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaOutputDto addPersona(PersonaInputDto persona) throws Exception {
+    public PersonaOutputDto addPersona(PersonaInputDto persona) throws EntityNotFoundException, UnprocessableEntityException {
         if (persona.getUsuario() == null || persona.getUsuario().length() < 6 || persona.getUsuario().length() > 10) {
-            throw new Exception("Usuario introducido erróneo, no cumple las condiciones");
+            throw new UnprocessableEntityException();
         }
         if (persona.getPassword() == null) {
-            throw new Exception("Usuario erróneo, el campo Password no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getName() == null) {
-            throw new Exception("Usuario erróneo, el campo Name no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCompanyEmail() == null) {
-            throw new Exception("Usuario erróneo, el campo Company Email no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getPersonalEmail() == null) {
-            throw new Exception("Usuario erróneo, el campo Personal Email no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCity() == null) {
-            throw new Exception("Usuario erróneo, el campo City no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getActive() == null) {
-            throw new Exception("Usuario erróneo, el campo Active no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         if (persona.getCreatedDate() == null) {
-            throw new Exception("Usuario erróneo, el campo Created Date no puede ser nulo");
+            throw new UnprocessableEntityException();
         }
         return personaRepository.save(new Persona(persona)).personaToPersonaOutputDto();
     }
