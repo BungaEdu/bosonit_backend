@@ -34,7 +34,7 @@ public class Persona {
     //not null]
     private String city;
     //[not null]
-    private boolean active;
+    private Boolean active;
     //not null]
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date createdDate;
@@ -73,6 +73,4 @@ public class Persona {
                 this.terminationDate
         );
     }
-
-
 }

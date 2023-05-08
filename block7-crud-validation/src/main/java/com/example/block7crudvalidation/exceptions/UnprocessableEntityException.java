@@ -14,7 +14,7 @@ public class UnprocessableEntityException extends RuntimeException {
     private Date timeStamp = new Date();
     public UnprocessableEntityException(){
     }
-    public CustomError getError() {
-        return new CustomError(timeStamp, HttpStatus.UNPROCESSABLE_ENTITY.value(), "Error UnprocessableEntityException: campos incorrectos");
+    public CustomError getError(String textoError) {
+        return new CustomError(timeStamp, HttpStatus.UNPROCESSABLE_ENTITY.value(), textoError);
     }
 }

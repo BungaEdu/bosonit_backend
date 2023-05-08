@@ -68,7 +68,7 @@ public class PersonaController {
         }
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
+/*    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<CustomError> handleEntityNotFoundException (EntityNotFoundException ex) {
         CustomError error = ex.getError();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
@@ -78,5 +78,5 @@ public class PersonaController {
     public ResponseEntity<CustomError> handleUnprocessableEntityException (UnprocessableEntityException ex) {
         CustomError error = ex.getError();
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
-    }
+    }*/
 }

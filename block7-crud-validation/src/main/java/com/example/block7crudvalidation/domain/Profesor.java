@@ -1,3 +1,4 @@
+/*
 package com.example.block7crudvalidation.domain;
 
 import jakarta.persistence.*;
@@ -22,4 +23,4 @@ public class Profesor {
     String coments;
     @Column(name = "rama")
     String branch;
-}
+}*/

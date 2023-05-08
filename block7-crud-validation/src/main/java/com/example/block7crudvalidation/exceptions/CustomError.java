@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomError {
+public class CustomError extends Throwable {
     private Date timeStamp;
     private int httpCode;
     private String mensaje;

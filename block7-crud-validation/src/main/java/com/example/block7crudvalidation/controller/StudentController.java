@@ -7,11 +7,11 @@ import com.example.block7crudvalidation.exceptions.CustomError;
 import com.example.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -21,9 +21,9 @@ public class StudentController {
     StudentServiceImpl StudentService;
 
     @PostMapping
-    public ResponseEntity<StudentOutputDto> addStudent(@RequestBody StudentInputDto Student) throws EntityNotFoundException, UnprocessableEntityException{
-        URI location = URI.create("/persona");
-        return ResponseEntity.created(location).body(StudentService.addStudent(Student));
+    public ResponseEntity<StudentOutputDto> addStudent(@RequestBody StudentInputDto student) throws EntityNotFoundException, UnprocessableEntityException, CustomError {
+        URI location = URI.create("/student");
+        return ResponseEntity.created(location).body(StudentService.addStudent(student));
     }
 
     @PutMapping("/{id}")
@@ -51,7 +51,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public Iterable<StudentOutputDto> getAllStudents(
+    public List<StudentOutputDto> getAllStudents(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize) {
 
@@ -68,7 +68,7 @@ public class StudentController {
         }
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
+/*    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<CustomError> handleEntityNotFoundException (EntityNotFoundException ex) {
         CustomError error = ex.getError();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
@@ -78,5 +78,5 @@ public class StudentController {
     public ResponseEntity<CustomError> handleUnprocessableEntityException (UnprocessableEntityException ex) {
         CustomError error = ex.getError();
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
-    }
+    }*/
 }

@@ -1,3 +1,4 @@
+/*
 package com.example.block7crudvalidation.domain;
 
 import jakarta.persistence.*;
@@ -13,11 +14,13 @@ import java.util.Date;
 @Setter
 public class StudentAsignatura {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     Integer id_study;
-    @ManyToOne(fetch = FetchType.LAZY)
+*/
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profesor_id")
-    Profesor profesor;
+    Profesor profesor;*//*
+
     @ManyToMany(cascade = CascadeType.ALL)
     Student student;
     @Column(name = "asignatura")
@@ -28,4 +31,4 @@ public class StudentAsignatura {
     Date initial_date;
     @Column(name = "finish_date")
     Date finish_date;
-}
+}*/
