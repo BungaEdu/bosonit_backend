@@ -1,5 +1,6 @@
 package com.example.block7crudvalidation.controller;
 
+import com.example.block7crudvalidation.application.PersonaService;
 import com.example.block7crudvalidation.application.PersonaServiceImpl;
 import com.example.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.example.block7crudvalidation.controller.dto.PersonaOutputDto;
@@ -9,19 +10,20 @@ import com.example.block7crudvalidation.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
 
-@RestController
+@Controller
 @RequestMapping("/persona")
 public class PersonaController {
     @Autowired
-    PersonaServiceImpl personaService;
+    PersonaService personaService;
 
     @PostMapping
-    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) throws EntityNotFoundException, UnprocessableEntityException{
+    public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto persona) throws Exception {
         URI location = URI.create("/persona");
         return ResponseEntity.created(location).body(personaService.addPersona(persona));
     }
