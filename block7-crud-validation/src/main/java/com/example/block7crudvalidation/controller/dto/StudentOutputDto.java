@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentOutputDto {
-    private Integer id_student;
+    private int id_student;
     private Persona persona;
     private Integer num_hours_week;
     private String coments;

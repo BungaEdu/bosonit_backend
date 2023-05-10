@@ -16,19 +16,19 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
-    StudentRepository StudentRepository;
+    StudentRepository studentRepository;
 
-/*    @Override
+    @Override
     public StudentOutputDto getStudentById(int id) {
-        return StudentRepository.findById(id).orElseThrow()
-                .StudentToStudentOutputDto();
-    }*/
+        return studentRepository.findById(id).orElseThrow()
+                .studentToStudentOutputDto();
+    }
 
     //aquí tengo que poner el
     @Override
     public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-        return StudentRepository.findAll(pageRequest).getContent()
+        return studentRepository.findAll(pageRequest).getContent()
                 .stream()
                 .map(Student::studentToStudentOutputDto).toList();
     }
@@ -40,8 +40,8 @@ public class StudentServiceImpl implements StudentService {
 /*
     @Override
     public void deleteStudentById(int id) {
-        StudentRepository.findById(id).orElseThrow();
-        StudentRepository.deleteById(id);
+        studentRepository.findById(id).orElseThrow();
+        studentRepository.deleteById(id);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
 
 /*    @Override
     public StudentOutputDto getStudentByUsuario(String usuario) {
-        return (StudentOutputDto) StudentRepository.findByUsuario(usuario).orElseThrow();
+        return (StudentOutputDto) studentRepository.findByUsuario(usuario).orElseThrow();
     }*/
 
     @Override
@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentOutputDto addStudent(StudentInputDto student) throws EntityNotFoundException, UnprocessableEntityException, CustomError {
+    public StudentOutputDto addStudent(StudentInputDto student) throws EntityNotFoundException, UnprocessableEntityException {
         /*if (student.getPersona().getUsuario() == null || student.getPersona().getUsuario().length() < 6 || student.getPersona().getUsuario().length() > 10) {
             throw new UnprocessableEntityException().getError("Error campo usuario");
         }
@@ -84,18 +84,13 @@ public class StudentServiceImpl implements StudentService {
         if (student.getPersona().getCity() == null) {
             throw new UnprocessableEntityException().getError("Error campo City");
         }
-*//*        if (student.getPersona().getActive() == null) {
+        if (student.getPersona().getActive() == null) {
             throw new UnprocessableEntityException();
-        }*//*
+        }
         if (student.getPersona().getCreatedDate() == null) {
             throw new UnprocessableEntityException().getError("Error campo CreatedDate");
         }*/
-        return StudentRepository.save(new Student(student)).studentToStudentOutputDto();
-    }
-
-    @Override
-    public StudentOutputDto getStudentById(int id) {
-        return null;
+        return studentRepository.save(new Student(student)).studentToStudentOutputDto();
     }
 
     @Override
@@ -105,7 +100,7 @@ public class StudentServiceImpl implements StudentService {
 /*
     @Override
     public StudentOutputDto updateStudent(StudentInputDto Student, int id) throws EntityNotFoundException, UnprocessableEntityException {
-        Student StudentAct = StudentRepository.findById(id).orElseThrow();
+        Student StudentAct = studentRepository.findById(id).orElseThrow();
         if (Student.getPersona().getUsuario() != null || Student.getUsuario().length() >= 6 || Student.getUsuario().length() <= 10) {
             StudentAct.setUsuario(Student.getUsuario());
         } else {
@@ -148,6 +143,6 @@ public class StudentServiceImpl implements StudentService {
         }
         StudentAct.setImagenUrl(Student.getImagenUrl());
         StudentAct.setTerminationDate(Student.getTerminationDate());
-        return StudentRepository.save(StudentAct).StudentToStudentOutputDto();
+        return studentRepository.save(StudentAct).StudentToStudentOutputDto();
     }*/
 }

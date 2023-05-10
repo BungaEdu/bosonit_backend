@@ -9,7 +9,7 @@ import com.example.block7crudvalidation.exceptions.UnprocessableEntityException;
 import java.util.List;
 
 public interface StudentService {
-    StudentOutputDto addStudent(StudentInputDto student) throws Exception, CustomError;
+    StudentOutputDto addStudent(StudentInputDto student);
 
     StudentOutputDto getStudentById(int id);
 

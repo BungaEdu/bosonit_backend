@@ -7,32 +7,29 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "estudiantes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue
-    Integer id_student;
+    private int id_student;
     @OneToOne
     @JoinColumn(name = "id_persona")
-    Persona persona;
+    private Persona persona;
     @Column(name = "horas_por_semana")
-    Integer num_hours_week;
+    private Integer num_hours_week;
     @Column(name = "comentarios")
-    String coments;
-    /*    @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "id_profesor")
-        Profesor profesor;*/
+    private String coments;
     @Column(name = "rama")
-    String branch;
-    /*@OneToMany
-    List<StudentAsignatura> estudios;*/
+    private String branch;
 
     public Student(StudentInputDto studentInputDto) {
-        this.id_student = studentInputDto.getId_student();
-        this.persona = studentInputDto.getPersona();
+        //Hacer find por persona ID
+
+        persona = new Persona();
+        this.persona.setId_persona(studentInputDto.getPersona_id());
         this.num_hours_week = studentInputDto.getNum_hours_week();
         this.coments = studentInputDto.getComents();
         this.branch = studentInputDto.getBranch();
@@ -79,7 +76,5 @@ public class Student {
                 this.branch
         );
     }*/
-
-
 }
 

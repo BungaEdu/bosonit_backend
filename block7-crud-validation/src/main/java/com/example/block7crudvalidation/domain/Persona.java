@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,11 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "persona")
 public class Persona {
     @Id
     @GeneratedValue
-    private int id;
+    private int id_persona;
     //not null max-length:10min-length:6]
     private String usuario;
     //not null]
@@ -43,7 +45,7 @@ public class Persona {
     private Date terminationDate;
 
     public Persona(PersonaInputDto personaInputDto) {
-        this.id = personaInputDto.getId();
+        this.id_persona = personaInputDto.getId_persona();
         this.usuario = personaInputDto.getUsuario();
         this.password = personaInputDto.getPassword();
         this.name = personaInputDto.getName();
@@ -59,7 +61,7 @@ public class Persona {
 
     public PersonaOutputDto personaToPersonaOutputDto() {
         return new PersonaOutputDto(
-                this.id,
+                this.id_persona,
                 this.usuario,
                 this.password,
                 this.name,
