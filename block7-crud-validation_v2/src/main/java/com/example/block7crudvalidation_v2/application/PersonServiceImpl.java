@@ -3,7 +3,6 @@ package com.example.block7crudvalidation_v2.application;
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
 import com.example.block7crudvalidation_v2.domain.Person;
-import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +49,6 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById(int id) {
-        if (personRepository.findById(id).isEmpty())
-            throw new EntityNotFoundException("La persona con ID: " + id + " no existe");
-        personRepository.deleteById(id);
-    }
-
-    @Override
     public List<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return personRepository.findAll(pageRequest).getContent()
@@ -66,9 +58,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonOutputDto updatePerson(PersonInputDto personInputDto) {
-        if (personRepository.findById(personInputDto.getId_person()).isEmpty())
-            throw new EntityNotFoundException("EntityNotFoundException: La persona con ID: " + personInputDto.getId_person() + " no existe");
-        Person person = new Person(personInputDto);
-        return personRepository.save(person).personToPersonOutputDto();
+        return personRepository.save(new Person(personInputDto)).personToPersonOutputDto();
+    }
+
+    @Override
+    public void deletePersonById(int id) {
+        personRepository.deleteById(id);
     }
 }

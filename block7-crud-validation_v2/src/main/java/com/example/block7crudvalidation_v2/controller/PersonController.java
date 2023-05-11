@@ -36,16 +36,6 @@ public class PersonController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePersonById(@PathVariable int id) {
-        try {
-            personService.deletePersonById(id);
-            return ResponseEntity.ok().body("Person with id: " + id + " was deleted");
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @GetMapping
     public Iterable<PersonOutputDto> getAllPersons(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
@@ -56,9 +46,18 @@ public class PersonController {
 
     @PutMapping
     public ResponseEntity<PersonOutputDto> updatePerson(@RequestBody PersonInputDto personInputDto) {
-        if(personRepository.findById(personInputDto.getId_person()).isEmpty()) {
-            throw new EntityNotFoundException("El id: "+personInputDto.getId_person()+" no existe, no se puede actualizar");
+        if (personRepository.findById(personInputDto.getId_person()).isEmpty()) {
+            throw new EntityNotFoundException("El id: " + personInputDto.getId_person() + " no existe, no se puede actualizar");
         }
         return ResponseEntity.ok().body(personService.addPerson(personInputDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePersonById(@PathVariable int id) {
+        if (personRepository.findById(id).isEmpty()) {
+            throw new EntityNotFoundException("El id: " + id + " no existe, no se puede borrar");
+        }
+        personService.deletePersonById(id);
+        return ResponseEntity.ok().body("Person with id: " + id + " was deleted");
     }
 }
