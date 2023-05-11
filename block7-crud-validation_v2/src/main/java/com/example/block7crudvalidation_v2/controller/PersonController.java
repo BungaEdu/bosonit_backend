@@ -3,6 +3,8 @@ package com.example.block7crudvalidation_v2.controller;
 import com.example.block7crudvalidation_v2.application.PersonService;
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
+import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    PersonRepository personRepository;
+
     @PostMapping
     public ResponseEntity<PersonOutputDto> addperson(@RequestBody PersonInputDto personInputDto) {
         URI location = URI.create("/person");
@@ -27,7 +32,7 @@ public class PersonController {
         try {
             return ResponseEntity.ok().body(personService.getPersonById(id));
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException("La persona con ID: " + id + " no existe");
         }
     }
 
@@ -51,12 +56,9 @@ public class PersonController {
 
     @PutMapping
     public ResponseEntity<PersonOutputDto> updatePerson(@RequestBody PersonInputDto personInputDto) {
-        try {
-            personService.getPersonById(personInputDto.getId_person());
-            return ResponseEntity.ok().body(personService.addPerson(personInputDto));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+        if(personRepository.findById(personInputDto.getId_person()).isEmpty()) {
+            throw new EntityNotFoundException("El id: "+personInputDto.getId_person()+" no existe, no se puede actualizar");
         }
+        return ResponseEntity.ok().body(personService.addPerson(personInputDto));
     }
 }
-
