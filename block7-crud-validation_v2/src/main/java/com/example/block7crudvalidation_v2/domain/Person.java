@@ -3,10 +3,7 @@ package com.example.block7crudvalidation_v2.domain;
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,8 @@ import java.util.Date;
 public class Person {
     @Id
     @GeneratedValue
-    private int id_person;
+    @Column(name = "id_person")
+    private int idPerson;
     private String usuario;
     private String password;
     private String name;
@@ -37,7 +35,7 @@ public class Person {
     private Date terminationDate;
 
     public Person (PersonInputDto personInputDto) {
-        this.id_person=personInputDto.getId_person();
+        this.idPerson =personInputDto.getId_person();
         this.usuario=personInputDto.getUsuario();
         this.password=personInputDto.getPassword();
         this.name=personInputDto.getName();
@@ -53,7 +51,7 @@ public class Person {
 
     public PersonOutputDto personToPersonOutputDto () {
         return new PersonOutputDto(
-                this.id_person,
+                this.idPerson,
                 this.usuario,
                 this.password,
                 this.name,

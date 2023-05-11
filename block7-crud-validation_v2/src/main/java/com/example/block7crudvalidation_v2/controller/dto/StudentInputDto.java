@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "student")
 public class StudentInputDto {
     Integer id_student;
     Person person;
     Integer hourPerWeek;
-    String coments;
+    String comments;
     String branch;
 }
 

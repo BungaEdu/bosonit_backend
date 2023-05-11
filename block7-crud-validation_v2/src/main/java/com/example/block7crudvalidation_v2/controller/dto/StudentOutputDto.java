@@ -9,13 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "student")
 public class StudentOutputDto {
-    Integer id_student;
-    Person person;
-    Integer hourPerWeek;
-    String coments;
-    String branch;
+    private Integer id_student;
+    private Integer hourPerWeek;
+    private String coments;
+    private String branch;
 }
 

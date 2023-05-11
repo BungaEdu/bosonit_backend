@@ -22,7 +22,7 @@ public class PersonController {
     PersonRepository personRepository;
 
     @PostMapping
-    public ResponseEntity<PersonOutputDto> addperson(@RequestBody PersonInputDto personInputDto) {
+    public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto personInputDto) {
         URI location = URI.create("/person");
         return ResponseEntity.created(location).body(personService.addPerson(personInputDto));
     }

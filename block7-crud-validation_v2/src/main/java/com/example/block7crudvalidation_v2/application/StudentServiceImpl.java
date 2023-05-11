@@ -19,25 +19,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentOutputDto addStudent(StudentInputDto studentInputDto) {
-        if (studentInputDto.getUsuario() == null ||  studentInputDto.getUsuario().length() < 6 || studentInputDto.getUsuario().length() > 10)
-            throw new UnprocessableEntityException("UnprocessableEntityException: " +
-                    "\n- USUARIO no puede ser nulo" +
-                    "\n- Tiene que tener igual o más de 6 dígitos" +
-                    "\n- Tiene que tener igual o menos de 10 dígitos");
-        if (studentInputDto.getPassword() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: PASSWORD no puede ser nulo");
-        if (studentInputDto.getName() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: NOMBRE no puede ser nulo");
-        if (studentInputDto.getCompanyEmail() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: COMPANYMAIL no puede ser nulo");
-        if (studentInputDto.getStudentalEmail() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: studentALMAIL no puede ser nulo");
-        if (studentInputDto.getCity() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: CITY no puede ser nulo");
-        if (studentInputDto.getActive() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: ACTIVE no puede ser nulo");
-        if (studentInputDto.getCreatedDate() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: CREATEDDATE no puede ser nulo");
         return studentRepository.save(new Student(studentInputDto))
                 .studentToStudentOutputDto();
     }
