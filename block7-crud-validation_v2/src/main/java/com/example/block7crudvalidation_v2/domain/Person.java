@@ -35,7 +35,7 @@ public class Person {
     private Date terminationDate;
 
     public Person (PersonInputDto personInputDto) {
-        this.idPerson =personInputDto.getId_person();
+        this.idPerson =personInputDto.getIdPerson();
         this.usuario=personInputDto.getUsuario();
         this.password=personInputDto.getPassword();
         this.name=personInputDto.getName();

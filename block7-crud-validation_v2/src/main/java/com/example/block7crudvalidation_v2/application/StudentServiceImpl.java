@@ -3,7 +3,6 @@ package com.example.block7crudvalidation_v2.application;
 import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDto;
 import com.example.block7crudvalidation_v2.domain.Student;
-import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
