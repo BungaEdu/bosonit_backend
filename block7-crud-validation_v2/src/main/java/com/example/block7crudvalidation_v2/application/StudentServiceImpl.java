@@ -2,6 +2,7 @@ package com.example.block7crudvalidation_v2.application;
 
 import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDto;
+import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDtoSimple;
 import com.example.block7crudvalidation_v2.domain.Student;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +20,27 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentOutputDto addStudent(StudentInputDto studentInputDto) {
         return studentRepository.save(new Student(studentInputDto))
-                .studentToStudentOutputDto();
+                .studentToStudentOutputDto(studentInputDto);
     }
 
     @Override
-    public StudentOutputDto getStudentById(int id) {
+    public StudentOutputDtoSimple getStudentById(int id) {
         return studentRepository.findById(id).orElseThrow()
-                .studentToStudentOutputDto();
+                .studentToStudentOutputDtoSimple();
     }
 
+
     @Override
-    public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
+    public List<StudentOutputDtoSimple> getAllStudents(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return studentRepository.findAll(pageRequest).getContent()
                 .stream()
-                .map(Student::studentToStudentOutputDto).toList();
+                .map(Student::studentToStudentOutputDtoSimple).toList();
     }
 
     @Override
-    public StudentOutputDto updateStudent(StudentInputDto studentInputDto) {
-        return studentRepository.save(new Student(studentInputDto)).studentToStudentOutputDto();
+    public StudentOutputDtoSimple updateStudent(StudentInputDto studentInputDto) {
+        return studentRepository.save(new Student(studentInputDto)).studentToStudentOutputDtoSimple();
     }
 
     @Override

@@ -1,13 +1,11 @@
 package com.example.block7crudvalidation_v2.domain;
 
-import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDto;
+import com.example.block7crudvalidation_v2.controller.dto.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Locale;
 
 @Entity
 @Data
@@ -16,8 +14,9 @@ import java.util.Locale;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue()
-    private Integer idStudent;
+    @GeneratedValue
+    @Column(name = "id_student")
+    private int idStudent;
     @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
@@ -26,19 +25,81 @@ public class Student {
     private String branch;
 
     public Student(StudentInputDto studentInputDto) {
-        this.idStudent = studentInputDto.getId_student();
+        this.idStudent = studentInputDto.getIdStudent();
         this.hourPerWeek = studentInputDto.getHourPerWeek();
         this.comments = studentInputDto.getComments();
         this.branch = studentInputDto.getBranch();
     }
-//Tienes que poner full y simple, no hay otra manera.
-    public StudentOutputDto studentToStudentOutputDto() {
+
+    public StudentOutputDto studentToStudentOutputDto(StudentInputDto studentInputDto) {
         return new StudentOutputDto(
                 this.idStudent,
+                studentInputDto.getIdPerson(),
+                this.hourPerWeek = studentInputDto.getHourPerWeek(),
+                this.comments = studentInputDto.getComments(),
+                this.branch = studentInputDto.getBranch()
+        );
+    }
+
+    public StudentOutputDtoSimple studentToStudentOutputDtoSimple() {
+        return new StudentOutputDtoSimple(
+                this.idStudent,
+                this.person.getIdPerson(),
                 this.hourPerWeek,
                 this.comments,
-                this.branch,
-                this.person.getIdPerson(),
+                this.branch
+        );
+    }
+
+    public StudentOutputDtoFull studentToStudentOutputDtoFull() {
+        Person person = new Person();
+        return new StudentOutputDtoFull(
+                this.idStudent,
+                person.getIdPerson(),
+                person.getUsuario(),
+                person.getPassword(),
+                person.getName(),
+                person.getSurname(),
+                person.getCompanyEmail(),
+                person.getPersonalEmail(),
+                person.getCity(),
+                person.getActive(),
+                person.getCreatedDate(),
+                person.getImagenUrl(),
+                person.getTerminationDate(),
+                this.hourPerWeek,
+                this.comments,
+                this.branch
+        );
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                /*this.person.getIdPerson(),
                 this.person.getUsuario(),
                 this.person.getPassword(),
                 this.person.getName(),
@@ -49,16 +110,4 @@ public class Student {
                 this.person.getActive(),
                 this.person.getCreatedDate(),
                 this.person.getImagenUrl(),
-                this.person.getTerminationDate()
-        );
-    }
-
-/*    public StudentOutputDtoFull studentToStudentOutputDto() {
-        return new StudentOutputDto(
-                this.idStudent,
-                this.hourPerWeek,
-                this.comments,
-                this.branch
-        );
-    }*/
-}
+                this.person.getTerminationDate()*/
