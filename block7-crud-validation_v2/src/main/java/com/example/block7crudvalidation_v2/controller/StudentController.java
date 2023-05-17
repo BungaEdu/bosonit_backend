@@ -8,6 +8,7 @@ import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
+import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,18 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    TeacherRepository teacherRepository;
 
     @PostMapping
     public ResponseEntity<StudentOutputDtoSimple> addStudent(@RequestBody StudentInputDto studentInputDto) {
         if (studentRepository.findByPersonIdPerson(studentInputDto.getIdPerson()).isPresent()) {
             throw new UnprocessableEntityException("La persona con ID: "
                     + studentInputDto.getIdPerson() + " ya tiene un Student asignado");
+        }
+        if (teacherRepository.findByPersonIdPerson(studentInputDto.getIdPerson()).isPresent()) {
+            throw new UnprocessableEntityException("La persona con ID: "
+                    + studentInputDto.getIdPerson() + " es un student, no puede ser teacher a la vez");
         }
         URI location = URI.create("/student");
         return ResponseEntity.created(location).body(studentService.addStudent(studentInputDto));

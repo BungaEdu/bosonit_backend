@@ -33,6 +33,11 @@ public class Person {
     private String imagenUrl;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date terminationDate;
+    @OneToOne(
+            mappedBy = "person",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Student student;
 
     public Person (PersonInputDto personInputDto) {
         this.idPerson =personInputDto.getIdPerson();

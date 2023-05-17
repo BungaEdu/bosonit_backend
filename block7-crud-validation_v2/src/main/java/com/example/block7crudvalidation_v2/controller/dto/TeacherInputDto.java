@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentOutputDto {
-    private int idStudent;
+public class TeacherInputDto {
+    private int idTeacher;
     private int idPerson;
-    private Integer hourPerWeek;
     private String comments;
     private String branch;
 }
-
