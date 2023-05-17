@@ -3,7 +3,10 @@ package com.example.block7crudvalidation_v2.controller;
 import com.example.block7crudvalidation_v2.application.StudentService;
 import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDtoSimple;
+import com.example.block7crudvalidation_v2.domain.Person;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
+import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,13 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
+
     @PostMapping
     public ResponseEntity<StudentOutputDtoSimple> addStudent(@RequestBody StudentInputDto studentInputDto) {
+        if (studentRepository.findByPersonIdPerson(studentInputDto.getIdPerson()).isPresent()) {
+            throw new UnprocessableEntityException("La persona con ID: "
+                    + studentInputDto.getIdPerson() + " ya tiene un Student asignado");
+        }
         URI location = URI.create("/student");
         return ResponseEntity.created(location).body(studentService.addStudent(studentInputDto));
     }
@@ -53,7 +61,7 @@ public class StudentController {
     @PutMapping
     public ResponseEntity<StudentOutputDtoSimple> updateStudent(@RequestBody StudentInputDto studentInputDto) {
         if (studentRepository.findById(studentInputDto.getIdStudent()).isEmpty()) {
-            throw new EntityNotFoundException("El id: " + studentInputDto.getIdStudent() + " no existe, no se puede actualizar");
+            throw new EntityNotFoundException("El student con id: " + studentInputDto.getIdStudent() + " no existe, no se puede actualizar");
         }
         return ResponseEntity.ok().body(studentService.addStudent(studentInputDto));
     }

@@ -47,7 +47,7 @@ public class PersonController {
     @PutMapping
     public ResponseEntity<PersonOutputDto> updatePerson(@RequestBody PersonInputDto personInputDto) {
         if (personRepository.findById(personInputDto.getIdPerson()).isEmpty()) {
-            throw new EntityNotFoundException("El id: " + personInputDto.getIdPerson() + " no existe, no se puede actualizar");
+            throw new EntityNotFoundException("La person con id: " + personInputDto.getIdPerson() + " no existe, no se puede actualizar");
         }
         return ResponseEntity.ok().body(personService.addPerson(personInputDto));
     }
