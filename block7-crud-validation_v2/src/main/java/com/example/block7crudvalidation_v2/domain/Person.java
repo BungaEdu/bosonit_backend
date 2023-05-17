@@ -2,6 +2,7 @@ package com.example.block7crudvalidation_v2.domain;
 
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
+import com.example.block7crudvalidation_v2.controller.dto.PersonStudentOutputDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,11 @@ public class Person {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Student student;
+    @OneToOne(
+            mappedBy = "person",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Teacher teacher;
 
     public Person (PersonInputDto personInputDto) {
         this.idPerson =personInputDto.getIdPerson();
@@ -70,4 +76,16 @@ public class Person {
                 this.terminationDate
         );
     }
+
+    public PersonStudentOutputDto personToPersonStudentOutputDto () {
+
+    }
+
+
+
+
+
+
+
+
 }

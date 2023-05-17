@@ -7,6 +7,8 @@ public interface PersonService {
     PersonOutputDto addPerson(PersonInputDto personInputDto);
     PersonOutputDto getPersonById(int id);
     void deletePersonById( int id);
+    PersonOutputDto getPersonByUsuario(String usuario);
+
     Iterable<PersonOutputDto> getAllPersons(int pageNumber, int pageSize);
     PersonOutputDto updatePerson(PersonInputDto Person);
 }

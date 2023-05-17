@@ -49,6 +49,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonOutputDto getPersonByUsuario(String usuario) {
+        return personRepository.findByUsuario(usuario).orElseThrow()
+                .personToPersonOutputDto();
+    }
+
+    @Override
     public List<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return personRepository.findAll(pageRequest).getContent()
@@ -65,4 +71,5 @@ public class PersonServiceImpl implements PersonService {
     public void deletePersonById(int id) {
         personRepository.deleteById(id);
     }
+
 }

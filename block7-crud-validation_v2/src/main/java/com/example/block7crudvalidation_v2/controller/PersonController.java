@@ -5,6 +5,8 @@ import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
+import com.example.block7crudvalidation_v2.repository.StudentRepository;
+import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,18 +23,39 @@ public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    TeacherRepository teacherRepository;
+
     @PostMapping
     public ResponseEntity<PersonOutputDto> addPerson(@RequestBody PersonInputDto personInputDto) {
         URI location = URI.create("/person");
         return ResponseEntity.created(location).body(personService.addPerson(personInputDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PersonOutputDto> getPersonById(@PathVariable int id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity<PersonOutputDto> getPersonById(@RequestParam(value = "outputType", defaultValue = "simple")
+                                                         String outputType,
+                                                         @PathVariable int id) {
         try {
             return ResponseEntity.ok().body(personService.getPersonById(id));
         } catch (Exception e) {
             throw new EntityNotFoundException("La persona con ID: " + id + " no existe");
+        }
+
+
+    }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<PersonOutputDto> getPersonByUsuario(@RequestParam(value = "outputType", defaultValue = "simple")
+                                                              String outputType,
+                                                              @PathVariable String usuario) {
+        try {
+            return ResponseEntity.ok().body(personService.getPersonByUsuario(usuario));
+        } catch (Exception e) {
+            throw new EntityNotFoundException("La persona con usuario: " + usuario + " no existe");
         }
     }
 
