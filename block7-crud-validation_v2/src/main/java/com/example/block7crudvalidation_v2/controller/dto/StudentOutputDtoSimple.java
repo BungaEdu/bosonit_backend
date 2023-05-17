@@ -13,4 +13,5 @@ public class StudentOutputDtoSimple {
     private Integer hourPerWeek;
     private String comments;
     private String branch;
+
 }

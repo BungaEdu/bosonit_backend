@@ -2,7 +2,6 @@ package com.example.block7crudvalidation_v2.controller;
 
 import com.example.block7crudvalidation_v2.application.StudentService;
 import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDto;
 import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDtoSimple;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -23,30 +23,35 @@ public class StudentController {
     StudentRepository studentRepository;
 
     @PostMapping
-    public ResponseEntity<StudentOutputDto> addStudent(@RequestBody StudentInputDto studentInputDto) {
+    public ResponseEntity<StudentOutputDtoSimple> addStudent(@RequestBody StudentInputDto studentInputDto) {
         URI location = URI.create("/student");
         return ResponseEntity.created(location).body(studentService.addStudent(studentInputDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentOutputDtoSimple> getStudentById(@PathVariable int id) {
-        try {
-            return ResponseEntity.ok().body(studentService.getStudentById(id));
-        } catch (Exception e) {
-            throw new EntityNotFoundException("El student con ID: " + id + " no existe");
-        }
+    public ResponseEntity<?> getStudentId(@RequestParam(value = "outputType",defaultValue = "simple")String outputType,
+                                          @PathVariable int id){
+        if(outputType.equalsIgnoreCase("full"))
+            return ResponseEntity.ok().body(studentService.getStudentByIdFull(id));
+        else
+            return ResponseEntity.ok().body(studentService.getStudentByIdSimple(id));
     }
 
     @GetMapping
-    public Iterable<StudentOutputDtoSimple> getAllStudents(
+    public List<?> getAllStudents(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
-            @RequestParam(defaultValue = "4", required = false) int pageSize) {
-
-        return studentService.getAllStudents(pageNumber, pageSize);
+            @RequestParam(defaultValue = "4", required = false) int pageSize,
+            @RequestParam(value = "outputType",defaultValue = "simple")String outputType) {
+        if(outputType.equalsIgnoreCase("full")) {
+            return studentService.getAllStudentsFull(pageNumber, pageSize);
+        }
+        else {
+            return studentService.getAllStudentsSimple(pageNumber, pageSize);
+        }
     }
 
     @PutMapping
-    public ResponseEntity<StudentOutputDto> updateStudent(@RequestBody StudentInputDto studentInputDto) {
+    public ResponseEntity<StudentOutputDtoSimple> updateStudent(@RequestBody StudentInputDto studentInputDto) {
         if (studentRepository.findById(studentInputDto.getIdStudent()).isEmpty()) {
             throw new EntityNotFoundException("El id: " + studentInputDto.getIdStudent() + " no existe, no se puede actualizar");
         }

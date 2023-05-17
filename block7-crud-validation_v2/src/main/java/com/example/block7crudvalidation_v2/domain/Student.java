@@ -26,20 +26,14 @@ public class Student {
 
     public Student(StudentInputDto studentInputDto) {
         this.idStudent = studentInputDto.getIdStudent();
+        Person person = new Person();
+        person.setIdPerson(studentInputDto.getIdPerson());
+        this.person = person;
         this.hourPerWeek = studentInputDto.getHourPerWeek();
         this.comments = studentInputDto.getComments();
         this.branch = studentInputDto.getBranch();
     }
 
-    public StudentOutputDto studentToStudentOutputDto(StudentInputDto studentInputDto) {
-        return new StudentOutputDto(
-                this.idStudent,
-                studentInputDto.getIdPerson(),
-                this.hourPerWeek = studentInputDto.getHourPerWeek(),
-                this.comments = studentInputDto.getComments(),
-                this.branch = studentInputDto.getBranch()
-        );
-    }
 
     public StudentOutputDtoSimple studentToStudentOutputDtoSimple() {
         return new StudentOutputDtoSimple(
@@ -52,7 +46,6 @@ public class Student {
     }
 
     public StudentOutputDtoFull studentToStudentOutputDtoFull() {
-        Person person = new Person();
         return new StudentOutputDtoFull(
                 this.idStudent,
                 person.getIdPerson(),
@@ -72,42 +65,4 @@ public class Student {
                 this.branch
         );
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                /*this.person.getIdPerson(),
-                this.person.getUsuario(),
-                this.person.getPassword(),
-                this.person.getName(),
-                this.person.getSurname(),
-                this.person.getCompanyEmail(),
-                this.person.getPersonalEmail(),
-                this.person.getCity(),
-                this.person.getActive(),
-                this.person.getCreatedDate(),
-                this.person.getImagenUrl(),
-                this.person.getTerminationDate()*/
