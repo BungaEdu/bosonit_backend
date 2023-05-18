@@ -1,13 +1,13 @@
 package com.example.block7crudvalidation_v2.domain;
 
-import com.example.block7crudvalidation_v2.controller.dto.TeacherInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherOutputDtoFull;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherOutputDtoSimple;
+import com.example.block7crudvalidation_v2.controller.dto.*;
 import com.example.block7crudvalidation_v2.controller.dto.TeacherInputDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -22,6 +22,9 @@ public class Teacher {
     @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
+    @OneToMany
+    @JoinColumn(name = "id_student")
+    private List<StudentOutputDtoSimple> Students;
     private String comments;
     private String branch;
 

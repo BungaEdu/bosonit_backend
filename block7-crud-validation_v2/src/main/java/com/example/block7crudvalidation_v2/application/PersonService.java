@@ -3,6 +3,8 @@ package com.example.block7crudvalidation_v2.application;
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
 
+import java.util.List;
+
 public interface PersonService {
     PersonOutputDto addPerson(PersonInputDto personInputDto);
 
@@ -12,8 +14,15 @@ public interface PersonService {
 
     PersonOutputDto getPersonByIdSimple(int id);
 
-    PersonOutputDto getPersonByUsuario(String usuario);
+    PersonOutputDto getPersonByUsuarioFull(String usuario);
+
+    PersonOutputDto getPersonByUsuarioSimple(String usuario);
 
     Iterable<PersonOutputDto> getAllPersons(int pageNumber, int pageSize);
+
+    List<PersonOutputDto> getAllPersonsFull(int pageNumber, int pageSize);
+
+    List<PersonOutputDto> getAllPersonsSimple(int pageNumber, int pageSize);
+
     PersonOutputDto updatePerson(PersonInputDto Person);
 }

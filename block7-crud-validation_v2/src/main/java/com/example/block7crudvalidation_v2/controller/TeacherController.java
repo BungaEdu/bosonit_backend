@@ -42,7 +42,7 @@ public class TeacherController {
         return ResponseEntity.created(location).body(teacherService.addTeacher(teacherInputDto));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> getTeacherId(@RequestParam(value = "outputType",defaultValue = "simple")String outputType,
                                           @PathVariable int id){
         if(outputType.equalsIgnoreCase("full"))
@@ -72,7 +72,7 @@ public class TeacherController {
         return ResponseEntity.ok().body(teacherService.addTeacher(teacherInputDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteTeacherById(@PathVariable int id) {
         if (teacherRepository.findById(id).isEmpty()) {
             throw new EntityNotFoundException("El id: " + id + " no existe, no se puede borrar");

@@ -20,6 +20,9 @@ public class Student {
     @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
+    @ManyToOne
+    @JoinColumn(name = "id_teacher")
+    private Teacher teacher;
     private Integer hourPerWeek;
     private String comments;
     private String branch;

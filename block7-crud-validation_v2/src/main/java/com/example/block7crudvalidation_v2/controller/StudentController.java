@@ -44,7 +44,7 @@ public class StudentController {
         return ResponseEntity.created(location).body(studentService.addStudent(studentInputDto));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> getStudentId(@RequestParam(value = "outputType",defaultValue = "simple")String outputType,
                                           @PathVariable int id){
         if(outputType.equalsIgnoreCase("full"))
@@ -74,7 +74,7 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.addStudent(studentInputDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
         if (studentRepository.findById(id).isEmpty()) {
             throw new EntityNotFoundException("El id: " + id + " no existe, no se puede borrar");

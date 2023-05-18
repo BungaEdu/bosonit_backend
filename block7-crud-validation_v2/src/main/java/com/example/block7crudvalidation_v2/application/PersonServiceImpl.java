@@ -1,8 +1,10 @@
 package com.example.block7crudvalidation_v2.application;
 
-import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
+import com.example.block7crudvalidation_v2.controller.PersonController;
+import com.example.block7crudvalidation_v2.controller.dto.*;
 import com.example.block7crudvalidation_v2.domain.Person;
+import com.example.block7crudvalidation_v2.domain.Student;
+import com.example.block7crudvalidation_v2.domain.Teacher;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +28,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) {
-        if (personInputDto.getUsuario() == null ||  personInputDto.getUsuario().length() < 6 || personInputDto.getUsuario().length() > 10)
+        if (personInputDto.getUsuario() == null || personInputDto.getUsuario().length() < 6 || personInputDto.getUsuario().length() > 10)
             throw new UnprocessableEntityException("UnprocessableEntityException: " +
                     "\n- USUARIO no puede ser nulo" +
                     "\n- Tiene que tener igual o más de 6 dígitos" +
@@ -50,8 +53,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonOutputDto getPersonByIdFull(int id) {
-        Person person =  personRepository.findById(id).orElseThrow();
-        if(studentRepository.findByPersonIdPerson(id).isPresent())
+        Person person = personRepository.findById(id).orElseThrow();
+        if (studentRepository.findByPersonIdPerson(id).isPresent())
             return person.personToPersonStudentOutputDto();
         else if (teacherRepository.findByPersonIdPerson(id).isPresent())
             return person.personToPersonTeacherOutputDto();
@@ -66,13 +69,47 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonOutputDto getPersonByUsuario(String usuario) {
+    public PersonOutputDto getPersonByUsuarioFull(String usuario) {
+        Person person = personRepository.findByUsuario(usuario).orElseThrow();
+        if (studentRepository.findByPersonUsuario(usuario).isPresent())
+            return person.personToPersonStudentOutputDto();
+        else if (teacherRepository.findByPersonUsuario(usuario).isPresent())
+            return person.personToPersonTeacherOutputDto();
+        else
+            return person.personToPersonOutputDto();
+    }
+
+    @Override
+    public PersonOutputDto getPersonByUsuarioSimple(String usuario) {
         return personRepository.findByUsuario(usuario).orElseThrow()
                 .personToPersonOutputDto();
     }
 
     @Override
-    public List<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
+    public Iterable<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
+        return null;
+    }
+
+    @Override
+    public List<PersonOutputDto> getAllPersonsFull(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        List<PersonOutputDto> personOutputDtos = new ArrayList<>();
+        List<Person> persons = (List<Person>) personRepository.findAll(pageRequest);
+        for (Person person : persons) {
+            if (studentRepository.findByPersonIdPerson(person.getIdPerson()).isPresent()) {
+                personOutputDtos.add(person.personToPersonStudentOutputDto());
+            } else if (teacherRepository.findByPersonIdPerson(person.getIdPerson()).isPresent()) {
+                personOutputDtos.add(person.personToPersonTeacherOutputDto());
+            } else {
+                personOutputDtos.add(person.personToPersonOutputDto());
+            }
+        }
+        return personOutputDtos;
+    }
+
+
+    @Override
+    public List<PersonOutputDto> getAllPersonsSimple(int pageNumber, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return personRepository.findAll(pageRequest).getContent()
                 .stream()
