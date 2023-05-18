@@ -1,11 +1,9 @@
 package com.example.block7crudvalidation_v2.application;
 
-import com.example.block7crudvalidation_v2.controller.PersonController;
-import com.example.block7crudvalidation_v2.controller.dto.*;
 import com.example.block7crudvalidation_v2.domain.Person;
-import com.example.block7crudvalidation_v2.domain.Student;
-import com.example.block7crudvalidation_v2.domain.Teacher;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
+import com.example.block7crudvalidation_v2.dto.input.PersonInputDto;
+import com.example.block7crudvalidation_v2.dto.output.PersonOutputDto;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import com.example.block7crudvalidation_v2.repository.TeacherRepository;
@@ -83,11 +81,6 @@ public class PersonServiceImpl implements PersonService {
     public PersonOutputDto getPersonByUsuarioSimple(String usuario) {
         return personRepository.findByUsuario(usuario).orElseThrow()
                 .personToPersonOutputDto();
-    }
-
-    @Override
-    public Iterable<PersonOutputDto> getAllPersons(int pageNumber, int pageSize) {
-        return null;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.block7crudvalidation_v2.domain;
 
-import com.example.block7crudvalidation_v2.controller.dto.*;
+import com.example.block7crudvalidation_v2.dto.input.PersonInputDto;
+import com.example.block7crudvalidation_v2.dto.output.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

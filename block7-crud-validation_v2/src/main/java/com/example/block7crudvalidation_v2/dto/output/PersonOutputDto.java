@@ -1,6 +1,5 @@
-package com.example.block7crudvalidation_v2.controller.dto;
+package com.example.block7crudvalidation_v2.dto.output;
 
-import com.example.block7crudvalidation_v2.domain.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentOutputDtoFull {
-    private int idStudent;
+public class PersonOutputDto {
     private int idPerson;
     private String usuario;
     private String password;
@@ -27,8 +25,4 @@ public class StudentOutputDtoFull {
     private String imagenUrl;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date terminationDate;
-    private Integer hourPerWeek;
-    private String comments;
-    private String branch;
 }
-

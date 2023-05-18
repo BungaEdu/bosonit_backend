@@ -1,4 +1,4 @@
-package com.example.block7crudvalidation_v2.controller.dto;
+package com.example.block7crudvalidation_v2.dto.output;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.block7crudvalidation_v2.application;
 
-import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
+import com.example.block7crudvalidation_v2.dto.input.PersonInputDto;
+import com.example.block7crudvalidation_v2.dto.output.PersonOutputDto;
 
 import java.util.List;
 
@@ -17,9 +17,6 @@ public interface PersonService {
     PersonOutputDto getPersonByUsuarioFull(String usuario);
 
     PersonOutputDto getPersonByUsuarioSimple(String usuario);
-
-    Iterable<PersonOutputDto> getAllPersons(int pageNumber, int pageSize);
-
     List<PersonOutputDto> getAllPersonsFull(int pageNumber, int pageSize);
 
     List<PersonOutputDto> getAllPersonsSimple(int pageNumber, int pageSize);

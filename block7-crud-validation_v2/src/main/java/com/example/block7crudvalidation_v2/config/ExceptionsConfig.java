@@ -1,5 +1,9 @@
-package com.example.block7crudvalidation_v2.exceptions;
+package com.example.block7crudvalidation_v2.config;
 
+import com.example.block7crudvalidation_v2.exceptions.CustomError;
+import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
+import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,5 +32,14 @@ public class ExceptionsConfig {
         error.setHttpCode(HttpStatus.UNPROCESSABLE_ENTITY.value());
         error.setMessage(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(OutputTypeNotFoundException.class)
+    public ResponseEntity<CustomError> handlerOutputTypeNotFoundException (Exception e) {
+        CustomError error = new CustomError();
+        error.setTimestamp(new Date());
+        error.setHttpCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        error.setMessage(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

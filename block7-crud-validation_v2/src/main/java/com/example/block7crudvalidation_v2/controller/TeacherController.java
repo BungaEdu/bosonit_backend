@@ -1,10 +1,10 @@
 package com.example.block7crudvalidation_v2.controller;
 
 import com.example.block7crudvalidation_v2.application.TeacherService;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherOutputDtoSimple;
-import com.example.block7crudvalidation_v2.domain.Student;
+import com.example.block7crudvalidation_v2.dto.input.TeacherInputDto;
+import com.example.block7crudvalidation_v2.dto.output.TeacherOutputDtoSimple;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import com.example.block7crudvalidation_v2.repository.TeacherRepository;
@@ -43,24 +43,28 @@ public class TeacherController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> getTeacherId(@RequestParam(value = "outputType",defaultValue = "simple")String outputType,
-                                          @PathVariable int id){
-        if(outputType.equalsIgnoreCase("full"))
+    public ResponseEntity<?> getTeacherId(@RequestParam(value = "outputType", defaultValue = "simple") String outputType,
+                                          @PathVariable int id) {
+        if (outputType.equalsIgnoreCase("full")) {
             return ResponseEntity.ok().body(teacherService.getTeacherByIdFull(id));
-        else
+        } else if (outputType.equalsIgnoreCase("simple")) {
             return ResponseEntity.ok().body(teacherService.getTeacherByIdSimple(id));
+        } else {
+            throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
+        }
     }
 
     @GetMapping
     public List<?> getAllTeachers(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize,
-            @RequestParam(value = "outputType",defaultValue = "simple")String outputType) {
-        if(outputType.equalsIgnoreCase("full")) {
+            @RequestParam(value = "outputType", defaultValue = "simple") String outputType) {
+        if (outputType.equalsIgnoreCase("full")) {
             return teacherService.getAllTeachersFull(pageNumber, pageSize);
-        }
-        else {
+        } else if (outputType.equalsIgnoreCase("simple")) {
             return teacherService.getAllTeachersSimple(pageNumber, pageSize);
+        } else {
+            throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
         }
     }
 

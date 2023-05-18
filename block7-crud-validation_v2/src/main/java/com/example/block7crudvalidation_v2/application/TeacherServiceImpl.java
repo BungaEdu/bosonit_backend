@@ -1,8 +1,8 @@
 package com.example.block7crudvalidation_v2.application;
 
-import com.example.block7crudvalidation_v2.controller.dto.TeacherInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherOutputDtoFull;
-import com.example.block7crudvalidation_v2.controller.dto.TeacherOutputDtoSimple;
+import com.example.block7crudvalidation_v2.dto.input.TeacherInputDto;
+import com.example.block7crudvalidation_v2.dto.output.TeacherOutputDtoFull;
+import com.example.block7crudvalidation_v2.dto.output.TeacherOutputDtoSimple;
 import com.example.block7crudvalidation_v2.domain.Teacher;
 import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;

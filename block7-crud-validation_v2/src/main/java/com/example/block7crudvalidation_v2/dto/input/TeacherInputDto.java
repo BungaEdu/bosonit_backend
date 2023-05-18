@@ -1,4 +1,4 @@
-package com.example.block7crudvalidation_v2.controller.dto;
+package com.example.block7crudvalidation_v2.dto.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,13 +1,11 @@
 package com.example.block7crudvalidation_v2.controller;
 
 import com.example.block7crudvalidation_v2.application.StudentService;
-import com.example.block7crudvalidation_v2.application.TeacherService;
-import com.example.block7crudvalidation_v2.controller.dto.StudentInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.StudentOutputDtoSimple;
-import com.example.block7crudvalidation_v2.domain.Person;
+import com.example.block7crudvalidation_v2.dto.input.StudentInputDto;
+import com.example.block7crudvalidation_v2.dto.output.StudentOutputDtoSimple;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
-import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,24 +43,29 @@ public class StudentController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> getStudentId(@RequestParam(value = "outputType",defaultValue = "simple")String outputType,
-                                          @PathVariable int id){
-        if(outputType.equalsIgnoreCase("full"))
+    public ResponseEntity<?> getStudentId(@RequestParam(value = "outputType", defaultValue = "simple") String outputType,
+                                          @PathVariable int id) {
+        if (outputType.equalsIgnoreCase("full")) {
             return ResponseEntity.ok().body(studentService.getStudentByIdFull(id));
-        else
+        } else if (outputType.equalsIgnoreCase("simple")) {
             return ResponseEntity.ok().body(studentService.getStudentByIdSimple(id));
+        } else {
+            throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
+        }
     }
+
 
     @GetMapping
     public List<?> getAllStudents(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize,
-            @RequestParam(value = "outputType",defaultValue = "simple")String outputType) {
-        if(outputType.equalsIgnoreCase("full")) {
+            @RequestParam(value = "outputType", defaultValue = "simple") String outputType) {
+        if (outputType.equalsIgnoreCase("full")) {
             return studentService.getAllStudentsFull(pageNumber, pageSize);
-        }
-        else {
+        } else if (outputType.equalsIgnoreCase("simple")) {
             return studentService.getAllStudentsSimple(pageNumber, pageSize);
+        } else {
+            throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
         }
     }
 

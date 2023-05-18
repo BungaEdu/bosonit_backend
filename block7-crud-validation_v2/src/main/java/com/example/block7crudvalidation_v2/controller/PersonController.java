@@ -1,10 +1,11 @@
 package com.example.block7crudvalidation_v2.controller;
 
 import com.example.block7crudvalidation_v2.application.PersonService;
-import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
-import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
-import com.example.block7crudvalidation_v2.controller.dto.PersonStudentOutputDto;
+import com.example.block7crudvalidation_v2.dto.input.PersonInputDto;
+import com.example.block7crudvalidation_v2.dto.output.PersonOutputDto;
+import com.example.block7crudvalidation_v2.dto.output.PersonStudentOutputDto;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
@@ -14,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/person")
@@ -54,7 +54,7 @@ public class PersonController {
                 PersonOutputDto personOutputDto = personService.getPersonByIdSimple(id);
                 return ResponseEntity.ok().body(personOutputDto);
             } else {
-                throw new Exception("outputType incorrecto (full/simple)");
+                throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
             }
         } catch (Exception e) {
             throw new EntityNotFoundException("La persona con ID: " + id + " no existe");
@@ -78,10 +78,10 @@ public class PersonController {
                 PersonOutputDto personOutputDto = personService.getPersonByUsuarioSimple(usuario);
                 return ResponseEntity.ok().body(personOutputDto);
             } else {
-                throw new Exception("outputType incorrecto (full/simple)");
+                throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
             }
         } catch (Exception e) {
-            throw new EntityNotFoundException("El usuario: " + usuario + " no existe");
+            throw new EntityNotFoundException("La persona con usuario: " + usuario + " no existe");
         }
     }
 
@@ -96,7 +96,7 @@ public class PersonController {
         } else if (outputType.equalsIgnoreCase("simple")){
             return personService.getAllPersonsSimple(pageNumber, pageSize);
         } else {
-            throw new Exception ("outputType incorrecto (full/simple)");
+            throw new OutputTypeNotFoundException("outputType incorrecto (full/simple)");
         }
     }
 
