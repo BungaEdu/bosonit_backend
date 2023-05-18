@@ -3,6 +3,7 @@ package com.example.block7crudvalidation_v2.controller;
 import com.example.block7crudvalidation_v2.application.PersonService;
 import com.example.block7crudvalidation_v2.controller.dto.PersonInputDto;
 import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
+import com.example.block7crudvalidation_v2.controller.dto.PersonStudentOutputDto;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/person")
@@ -40,12 +42,20 @@ public class PersonController {
                                                          String outputType,
                                                          @PathVariable int id) {
         try {
-            return ResponseEntity.ok().body(personService.getPersonById(id));
+            if (outputType.equalsIgnoreCase("full")) {
+                PersonOutputDto personOutputDto = personService.getPersonByIdFull(id);
+                if (personOutputDto instanceof PersonStudentOutputDto personStudentOutputDto) {
+                    return ResponseEntity.ok().body(personStudentOutputDto);
+                } else {
+                    return ResponseEntity.ok().body(personOutputDto);
+                }
+            } else {
+                PersonOutputDto personOutputDto = personService.getPersonByIdSimple(id);
+                return ResponseEntity.ok().body(personOutputDto);
+            }
         } catch (Exception e) {
             throw new EntityNotFoundException("La persona con ID: " + id + " no existe");
         }
-
-
     }
 
     @GetMapping("/usuario/{id}")

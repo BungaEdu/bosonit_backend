@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonStudentOutputDto {
+public class PersonStudentOutputDto extends PersonOutputDto{
     private int idStudent;
     private int idPerson;
     private String usuario;

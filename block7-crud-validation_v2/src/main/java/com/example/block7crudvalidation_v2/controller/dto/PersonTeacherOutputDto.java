@@ -1,10 +1,16 @@
 package com.example.block7crudvalidation_v2.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-public class PersonTeacherOutputDto {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PersonTeacherOutputDto extends PersonOutputDto{
     private int idTeacher;
     private int idPerson;
     private String usuario;

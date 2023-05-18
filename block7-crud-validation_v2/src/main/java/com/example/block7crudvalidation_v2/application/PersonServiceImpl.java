@@ -5,6 +5,8 @@ import com.example.block7crudvalidation_v2.controller.dto.PersonOutputDto;
 import com.example.block7crudvalidation_v2.domain.Person;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
+import com.example.block7crudvalidation_v2.repository.StudentRepository;
+import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     PersonRepository personRepository;
+    @Autowired
+    StudentRepository studentRepository;
+    @Autowired
+    TeacherRepository teacherRepository;
 
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) {
@@ -43,7 +49,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonOutputDto getPersonById(int id) {
+    public PersonOutputDto getPersonByIdFull(int id) {
+        Person person =  personRepository.findById(id).orElseThrow();
+        if(studentRepository.findByPersonIdPerson(id).isPresent())
+            return person.personToPersonStudentOutputDto();
+        else
+            return person.personToPersonOutputDto();
+    }
+
+    @Override
+    public PersonOutputDto getPersonByIdSimple(int id) {
         return personRepository.findById(id).orElseThrow()
                 .personToPersonOutputDto();
     }
