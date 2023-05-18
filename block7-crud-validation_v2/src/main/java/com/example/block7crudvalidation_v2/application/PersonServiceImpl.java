@@ -53,6 +53,8 @@ public class PersonServiceImpl implements PersonService {
         Person person =  personRepository.findById(id).orElseThrow();
         if(studentRepository.findByPersonIdPerson(id).isPresent())
             return person.personToPersonStudentOutputDto();
+        else if (teacherRepository.findByPersonIdPerson(id).isPresent())
+            return person.personToPersonTeacherOutputDto();
         else
             return person.personToPersonOutputDto();
     }
