@@ -8,6 +8,11 @@ import java.util.List;
 
 public interface StudentService {
     StudentOutputDtoSimple addStudent(StudentInputDto StudentInputDto);
+
+    StudentOutputDtoSimple addSubjectToStudent(int id, List<Integer> idList);
+
+    StudentOutputDtoSimple removeSubjectsToStudent(int id, List<Integer> idList);
+
     StudentOutputDtoSimple getStudentByIdSimple(int id);
 
     StudentOutputDtoFull getStudentByIdFull(int id);
@@ -18,4 +23,5 @@ public interface StudentService {
     List<StudentOutputDtoFull> getAllStudentsFull(int pageNumber, int pageSize);
 
     StudentOutputDtoSimple updateStudent(StudentInputDto Student);
+
 }

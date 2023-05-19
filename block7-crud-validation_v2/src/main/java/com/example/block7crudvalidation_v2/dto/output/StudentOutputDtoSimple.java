@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -13,8 +15,8 @@ import java.util.List;
 public class StudentOutputDtoSimple {
     private int idStudent;
     private int idPerson;
-    private List<Subject> subjects;
     Integer hourPerWeek;
     private String comments;
     private String branch;
+    private Set<Subject> subjects;
 }

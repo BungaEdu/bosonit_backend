@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentSubjectsDto extends StudentOutputDtoSimple{
+public class StudentSubjectsDto {
     private int idStudent;
     private int idPerson;
     Integer hourPerWeek;

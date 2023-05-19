@@ -16,14 +16,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Subject")
+@Table(name = "subject")
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int idSubject;
-    @ManyToMany
-    @JoinColumn(name = "id_student")
-    List<Student> student;
+    @ManyToMany (mappedBy = "subjects")
+    List<Student> students;
     String name;
     String comment;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")

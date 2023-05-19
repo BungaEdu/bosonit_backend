@@ -1,6 +1,7 @@
 package com.example.block7crudvalidation_v2.controller;
 
 import com.example.block7crudvalidation_v2.application.SubjectService;
+import com.example.block7crudvalidation_v2.domain.Subject;
 import com.example.block7crudvalidation_v2.dto.input.SubjectInputDto;
 import com.example.block7crudvalidation_v2.dto.output.SubjectOutputDto;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;

@@ -24,8 +24,7 @@ public class Teacher {
     @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
-    @OneToMany
-    @JoinColumn(name = "id_student")
+    @OneToMany (mappedBy = "teacher")
     private List<Student> students;
     private String comments;
     private String branch;

@@ -3,13 +3,14 @@ package com.example.block7crudvalidation_v2.domain;
 import com.example.block7crudvalidation_v2.dto.input.StudentInputDto;
 import com.example.block7crudvalidation_v2.dto.output.StudentOutputDtoFull;
 import com.example.block7crudvalidation_v2.dto.output.StudentOutputDtoSimple;
-import com.example.block7crudvalidation_v2.dto.output.SubjectOutputDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 
 @Entity
@@ -26,12 +27,9 @@ public class Student {
     @JoinColumn(name = "id_person")
     private Person person;
     @ManyToMany
-    @JoinColumn(name = "id_subject")
-    private List<Subject> subject;
+    private Set<Subject> subjects;
     @ManyToOne
-    @JoinColumn(name = "id_teacher")
     private Teacher teacher;
-    private List<Subject> subjects;
     private Integer hourPerWeek;
     private String comments;
     private String branch;
@@ -51,10 +49,10 @@ public class Student {
         return new StudentOutputDtoSimple(
                 this.idStudent,
                 this.person.getIdPerson(),
-                this.subjects,
                 this.hourPerWeek,
                 this.comments,
-                this.branch
+                this.branch,
+                this.subjects
         );
     }
 

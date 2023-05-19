@@ -42,6 +42,28 @@ public class StudentController {
         return ResponseEntity.created(location).body(studentService.addStudent(studentInputDto));
     }
 
+    @PutMapping("/addSubjectsToStudent/{idStudent}")
+    public ResponseEntity<StudentOutputDtoSimple> addSubjectsToStudent(@PathVariable int idStudent,
+                                                                       @RequestBody List<Integer> idList){
+        try {
+            studentService.addSubjectToStudent(idStudent, idList);
+            return ResponseEntity.ok().body(studentService.getStudentByIdSimple(idStudent));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/removeAsignatura/{idStudent}")
+    public ResponseEntity<StudentOutputDtoSimple> removeEstudiosToStudent(@PathVariable int idStudent,
+                                                                          @RequestParam List<Integer> idList){
+        try {
+            studentService.removeSubjectsToStudent(idStudent, idList);
+            return ResponseEntity.ok().body(studentService.getStudentByIdSimple(idStudent));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getStudentId(@RequestParam(value = "outputType", defaultValue = "simple") String outputType,
                                           @PathVariable int id) {
