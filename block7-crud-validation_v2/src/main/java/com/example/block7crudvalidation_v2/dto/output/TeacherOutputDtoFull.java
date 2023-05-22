@@ -1,11 +1,13 @@
 package com.example.block7crudvalidation_v2.dto.output;
 
+import com.example.block7crudvalidation_v2.domain.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +30,5 @@ public class TeacherOutputDtoFull {
     private Date terminationDate;
     private String comments;
     private String branch;
+    private List<Student> students;
 }

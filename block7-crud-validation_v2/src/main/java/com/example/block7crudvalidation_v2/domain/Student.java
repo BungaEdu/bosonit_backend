@@ -78,7 +78,8 @@ public class Student {
                 this.hourPerWeek,
                 this.comments,
                 this.branch,
-                this.subjects
+                this.subjects,
+                this.teacher
         );
     }
 }

@@ -17,8 +17,7 @@ public interface PersonService {
     PersonOutputDto getPersonByUsuarioFull(String usuario);
 
     PersonOutputDto getPersonByUsuarioSimple(String usuario);
-    List<PersonOutputDto> getAllPersonsFull(int pageNumber, int pageSize);
-
+    List<PersonOutputDto> getAllPersonsFull();
     List<PersonOutputDto> getAllPersonsSimple(int pageNumber, int pageSize);
 
     PersonOutputDto updatePerson(PersonInputDto Person);

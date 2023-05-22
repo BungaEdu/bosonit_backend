@@ -65,7 +65,8 @@ public class Teacher {
                 person.getImagenUrl(),
                 person.getTerminationDate(),
                 this.comments,
-                this.branch
+                this.branch,
+                this.students
         );
     }
 }

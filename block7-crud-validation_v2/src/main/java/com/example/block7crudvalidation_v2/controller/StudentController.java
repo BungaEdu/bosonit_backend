@@ -54,8 +54,8 @@ public class StudentController {
     }
 
     @PutMapping("/removeAsignatura/{idStudent}")
-    public ResponseEntity<StudentOutputDtoSimple> removeEstudiosToStudent(@PathVariable int idStudent,
-                                                                          @RequestParam List<Integer> idList){
+    public ResponseEntity<StudentOutputDtoSimple> removeSubjectsToStudent(@PathVariable int idStudent,
+                                                                          @RequestParam ("idList") List<Integer> idList){
         try {
             studentService.removeSubjectsToStudent(idStudent, idList);
             return ResponseEntity.ok().body(studentService.getStudentByIdSimple(idStudent));

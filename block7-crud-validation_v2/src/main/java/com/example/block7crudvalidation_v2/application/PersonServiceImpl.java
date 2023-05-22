@@ -84,10 +84,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonOutputDto> getAllPersonsFull(int pageNumber, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+    public List<PersonOutputDto> getAllPersonsFull() {
         List<PersonOutputDto> personOutputDtos = new ArrayList<>();
-        List<Person> persons = (List<Person>) personRepository.findAll(pageRequest);
+        List<Person> persons = personRepository.findAll();
         for (Person person : persons) {
             if (studentRepository.findByPersonIdPerson(person.getIdPerson()).isPresent()) {
                 personOutputDtos.add(person.personToPersonStudentOutputDto());

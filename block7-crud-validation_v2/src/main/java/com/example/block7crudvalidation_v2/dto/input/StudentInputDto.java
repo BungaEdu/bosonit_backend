@@ -13,5 +13,6 @@ public class StudentInputDto {
     Integer hourPerWeek;
     String comments;
     String branch;
+    int idTeacher;
 }
 

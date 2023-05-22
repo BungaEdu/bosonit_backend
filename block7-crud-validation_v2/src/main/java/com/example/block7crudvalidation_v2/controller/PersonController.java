@@ -92,7 +92,7 @@ public class PersonController {
             @RequestParam(value = "outputType", defaultValue = "simple")
             String outputType) throws Exception {
         if (outputType.equalsIgnoreCase("full")) {
-            return personService.getAllPersonsFull(pageNumber, pageSize);
+            return personService.getAllPersonsFull();
         } else if (outputType.equalsIgnoreCase("simple")){
             return personService.getAllPersonsSimple(pageNumber, pageSize);
         } else {

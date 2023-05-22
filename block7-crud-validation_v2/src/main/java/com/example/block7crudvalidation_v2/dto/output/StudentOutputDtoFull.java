@@ -2,6 +2,7 @@ package com.example.block7crudvalidation_v2.dto.output;
 
 import com.example.block7crudvalidation_v2.domain.Person;
 import com.example.block7crudvalidation_v2.domain.Subject;
+import com.example.block7crudvalidation_v2.domain.Teacher;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +34,6 @@ public class StudentOutputDtoFull {
     private String comments;
     private String branch;
     private Set<Subject> subjects;
+    private Teacher teacher;
 }
 
