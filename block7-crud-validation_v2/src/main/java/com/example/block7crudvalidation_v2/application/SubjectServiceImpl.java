@@ -4,6 +4,7 @@ import com.example.block7crudvalidation_v2.domain.Student;
 import com.example.block7crudvalidation_v2.domain.Subject;
 import com.example.block7crudvalidation_v2.dto.input.SubjectInputDto;
 import com.example.block7crudvalidation_v2.dto.output.SubjectOutputDto;
+import com.example.block7crudvalidation_v2.exceptions.SubjectHasStudentsException;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import com.example.block7crudvalidation_v2.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,11 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public void deleteSubjectById(int id) {
+        Subject subject = subjectRepository.findById(id).orElseThrow();
+        if (!subject.getStudents().isEmpty()) {
+            throw new SubjectHasStudentsException("No se puede borrar, esta asignatura tiene alumnos asociados");
+        }
         subjectRepository.deleteById(id);
     }
+
 }

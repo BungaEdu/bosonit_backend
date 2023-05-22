@@ -3,6 +3,7 @@ package com.example.block7crudvalidation_v2.domain;
 import com.example.block7crudvalidation_v2.dto.input.SubjectInputDto;
 import com.example.block7crudvalidation_v2.dto.output.SubjectOutputDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int idSubject;
     @ManyToMany (mappedBy = "subjects")
+    @JsonIgnore
     List<Student> students;
     String name;
     String comment;

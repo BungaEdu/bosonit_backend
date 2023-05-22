@@ -44,7 +44,7 @@ public class StudentController {
 
     @PutMapping("/addSubjectsToStudent/{idStudent}")
     public ResponseEntity<StudentOutputDtoSimple> addSubjectsToStudent(@PathVariable int idStudent,
-                                                                       @RequestBody List<Integer> idList){
+                                                                       @RequestParam ("idList") List<Integer> idList){
         try {
             studentService.addSubjectToStudent(idStudent, idList);
             return ResponseEntity.ok().body(studentService.getStudentByIdSimple(idStudent));

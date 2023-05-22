@@ -3,6 +3,8 @@ package com.example.block7crudvalidation_v2.domain;
 import com.example.block7crudvalidation_v2.dto.input.StudentInputDto;
 import com.example.block7crudvalidation_v2.dto.output.StudentOutputDtoFull;
 import com.example.block7crudvalidation_v2.dto.output.StudentOutputDtoSimple;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +29,10 @@ public class Student {
     @JoinColumn(name = "id_person")
     private Person person;
     @ManyToMany
+    @JsonManagedReference
     private Set<Subject> subjects;
     @ManyToOne
+    @JsonBackReference
     private Teacher teacher;
     private Integer hourPerWeek;
     private String comments;
@@ -73,7 +77,8 @@ public class Student {
                 person.getTerminationDate(),
                 this.hourPerWeek,
                 this.comments,
-                this.branch
+                this.branch,
+                this.subjects
         );
     }
 }

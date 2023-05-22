@@ -29,6 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentOutputDtoSimple addSubjectToStudent(int id, List<Integer> idList) {
+
         Subject subject;
         Set<Subject> estudiosList = new HashSet<>();
         for (Integer i : idList) {
