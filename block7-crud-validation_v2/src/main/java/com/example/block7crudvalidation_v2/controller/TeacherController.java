@@ -6,6 +6,7 @@ import com.example.block7crudvalidation_v2.dto.output.TeacherOutputDtoSimple;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.UnprocessableEntityException;
+import com.example.block7crudvalidation_v2.feign.TeacherFeignClient;
 import com.example.block7crudvalidation_v2.repository.StudentRepository;
 import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,18 @@ public class TeacherController {
 
     @Autowired
     StudentRepository studentRepository;
+
+    private final TeacherFeignClient teacherFeignClient;
+
+    public TeacherController(TeacherFeignClient teacherFeignClient) {
+        this.teacherFeignClient = teacherFeignClient;
+    }
+
+    @GetMapping ("/feign/{id}")
+    public TeacherOutputDtoSimple getTeacherFeignById (@PathVariable int id) {
+        return teacherFeignClient.getTeacherById(String.valueOf(id));
+    }
+
 
     @PostMapping
     public ResponseEntity<TeacherOutputDtoSimple> addTeacher(@RequestBody TeacherInputDto teacherInputDto) {
