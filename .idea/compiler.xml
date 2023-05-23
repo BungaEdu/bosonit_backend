@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="block3-maven-package" />
+        <module name="block8-junit" />
         <module name="block3-create-repo-git" />
+        <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
       </profile>
     </annotationProcessing>
