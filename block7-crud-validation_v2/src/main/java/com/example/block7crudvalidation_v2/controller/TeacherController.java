@@ -35,9 +35,9 @@ public class TeacherController {
         this.teacherFeignClient = teacherFeignClient;
     }
 
-    @GetMapping ("/feign/{id}")
+    @GetMapping ("/{id}")
     public TeacherOutputDtoSimple getTeacherFeignById (@PathVariable int id) {
-        return teacherFeignClient.getTeacherById(String.valueOf(id));
+        return teacherFeignClient.getTeacherByIdSimple(id);
     }
 
 
