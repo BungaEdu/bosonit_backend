@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/block3-create-repo-git/pom.xml" />
         <option value="$PROJECT_DIR$/block8-junit/pom.xml" />
         <option value="$PROJECT_DIR$/../../block10-dockerize-app/pom.xml" />
+        <option value="$PROJECT_DIR$/../../block11-crud-validation-cors/pom.xml" />
       </list>
     </option>
   </component>
