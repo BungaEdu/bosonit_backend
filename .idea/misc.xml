@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/block3-maven-package/pom.xml" />
         <option value="$PROJECT_DIR$/block3-create-repo-git/pom.xml" />
         <option value="$PROJECT_DIR$/block8-junit/pom.xml" />
+        <option value="$PROJECT_DIR$/../../block10-dockerize-app/pom.xml" />
       </list>
     </option>
   </component>
