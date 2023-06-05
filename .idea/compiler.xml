@@ -7,14 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="block8-junit" />
-        <module name="block11-crud-validation-cors" />
         <module name="block3-create-repo-git" />
         <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
+        <module name="block11-upload-download-files" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="block10-dockerize-app" target="17" />
+      <module name="block11-crud-validation-cors" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
