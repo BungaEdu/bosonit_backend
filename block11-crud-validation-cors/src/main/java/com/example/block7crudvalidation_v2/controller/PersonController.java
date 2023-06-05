@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-
+@CrossOrigin("https://codepen.io/de4imo/pen/VwMRENP")
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -85,7 +85,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getall")
     public Iterable<PersonOutputDto> getAllPersons(
             @RequestParam(defaultValue = "0", required = false) int pageNumber,
             @RequestParam(defaultValue = "4", required = false) int pageSize,
