@@ -10,18 +10,22 @@
         <module name="block3-create-repo-git" />
         <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
-        <module name="block11-upload-download-files" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="block10-dockerize-app" target="17" />
       <module name="block11-crud-validation-cors" target="17" />
+      <module name="block11-upload-download-files" target="17" />
+      <module name="block11-upload-download-files_v2" target="17" />
+      <module name="demo" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="block10-dockerize-app" options="-parameters" />
       <module name="block11-crud-validation-cors" options="-parameters" />
+      <module name="block11-upload-download-files_v2" options="-parameters" />
+      <module name="demo" options="-parameters" />
     </option>
   </component>
 </project>

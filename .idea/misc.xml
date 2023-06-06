@@ -11,7 +11,13 @@
         <option value="$PROJECT_DIR$/../../block10-dockerize-app/pom.xml" />
         <option value="$PROJECT_DIR$/../../block11-crud-validation-cors/pom.xml" />
         <option value="$PROJECT_DIR$/block11-upload-download-files/pom.xml" />
+        <option value="$PROJECT_DIR$/../../block11-upload-download-files_v2/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/block11-upload-download-files/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">

@@ -1,4 +1,4 @@
-package org.example.controller.dto;
+package com.example.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;

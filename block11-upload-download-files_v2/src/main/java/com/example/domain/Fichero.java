@@ -1,12 +1,12 @@
-package org.example.domain;
+package com.example.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.controller.dto.FicheroInput;
-import org.example.controller.dto.FicheroOutput;
+import com.example.controller.dto.FicheroInput;
+import com.example.controller.dto.FicheroOutput;
 
 import java.util.Date;
 
@@ -17,7 +17,7 @@ import java.util.Date;
 public class Fichero {
     @Id
     @GeneratedValue
-    @Column(name = "id_person")
+    @Column(name = "id_fichero")
     private int idFichero;
     private String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
