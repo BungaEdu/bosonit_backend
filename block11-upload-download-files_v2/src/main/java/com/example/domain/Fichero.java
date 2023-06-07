@@ -3,6 +3,7 @@ package com.example.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.example.controller.dto.FicheroInput;
@@ -14,6 +15,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "fichero")
 public class Fichero {
     @Id
     @GeneratedValue
@@ -23,6 +26,8 @@ public class Fichero {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date uploadDate;
     private String category;
+    @Lob
+    private byte[] fileData;
 
     public Fichero(FicheroInput ficheroInput) {
         this.name = ficheroInput.getName();
