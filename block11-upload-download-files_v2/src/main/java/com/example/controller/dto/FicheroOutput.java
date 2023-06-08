@@ -18,7 +18,4 @@ public class FicheroOutput {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date uploadDate;
     private String category;
-    @Lob
-    private byte[] fileData;
-
 }

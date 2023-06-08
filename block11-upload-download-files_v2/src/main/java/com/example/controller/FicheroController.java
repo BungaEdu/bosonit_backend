@@ -8,6 +8,8 @@ import com.example.repository.FicheroRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -26,14 +30,6 @@ public class FicheroController {
     @Autowired
     FicheroRepository ficheroRepository;
 
-//    @PostMapping("/upload/{tipo}")
-//    public ResponseEntity<FicheroOutput> addFichero(
-//            @PathVariable String tipo,
-//            @RequestParam("file") MultipartFile file,
-//            @RequestBody FicheroInput ficheroInput) {
-//        URI location = URI.create("/fichero");
-//        return ResponseEntity.created(location).body(ficheroService.addFichero(ficheroInput));
-//    }
 
     @PostMapping("upload/{tipo}")
     public ResponseEntity<?> uploadFichero(
@@ -53,7 +49,18 @@ public class FicheroController {
         }
     }
 
-
+    @GetMapping("download/{filename}")
+    public ResponseEntity<Resource> downloadFichero(@PathVariable String filename) throws MalformedURLException {
+        Path pathToFile = Path.of("C:\\tmp\\" + filename);
+        UrlResource resource = new UrlResource(pathToFile.toUri());
+        if (resource.exists() && resource.isReadable()) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
     @GetMapping("/id/{id}")
