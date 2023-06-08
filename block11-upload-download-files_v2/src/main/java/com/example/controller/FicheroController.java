@@ -26,7 +26,6 @@ public class FicheroController {
     @Autowired
     FicheroRepository ficheroRepository;
 
-
     @PostMapping("upload/{tipo}")
     public ResponseEntity<?> uploadFichero(
             @PathVariable String tipo,
@@ -44,6 +43,7 @@ public class FicheroController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El tipo de archivo no es válido para este endpoint.");
         }
     }
+
 
     @GetMapping("download/filename/{filename}")
     public ResponseEntity<Resource> downloadFicheroByName(@PathVariable String filename) throws MalformedURLException {

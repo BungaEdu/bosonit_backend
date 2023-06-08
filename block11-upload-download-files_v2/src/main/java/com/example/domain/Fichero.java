@@ -26,8 +26,6 @@ public class Fichero {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private Date uploadDate;
     private String category;
-    @Lob
-    private byte[] fileData;
 
     public Fichero(FicheroInput ficheroInput) {
         this.name = ficheroInput.getName();
