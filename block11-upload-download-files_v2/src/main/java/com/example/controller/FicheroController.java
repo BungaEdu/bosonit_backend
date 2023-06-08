@@ -1,8 +1,7 @@
 package com.example.controller;
 
 import com.example.application.FicheroService;
-import com.example.controller.dto.FicheroInput;
-import com.example.controller.dto.FicheroOutput;
+import com.example.block11UploadDownloadFiles;
 import com.example.domain.Fichero;
 import com.example.repository.FicheroRepository;
 import org.apache.commons.io.FilenameUtils;
@@ -11,14 +10,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -49,9 +45,10 @@ public class FicheroController {
         }
     }
 
-    @GetMapping("download/{filename}")
-    public ResponseEntity<Resource> downloadFichero(@PathVariable String filename) throws MalformedURLException {
-        Path pathToFile = Path.of("C:\\tmp\\" + filename);
+    @GetMapping("download/filename/{filename}")
+    public ResponseEntity<Resource> downloadFicheroByName(@PathVariable String filename) throws MalformedURLException {
+        String pathDownload = block11UploadDownloadFiles.getDirectorioGuardado();
+        Path pathToFile = Path.of(pathDownload + filename);
         UrlResource resource = new UrlResource(pathToFile.toUri());
         if (resource.exists() && resource.isReadable()) {
             return ResponseEntity.ok()
@@ -62,6 +59,20 @@ public class FicheroController {
         }
     }
 
+    @GetMapping("download/id/{id}")
+    public ResponseEntity<Resource> downloadFicheroById(@PathVariable int id) throws MalformedURLException {
+        Fichero fichero = ficheroRepository.findById(id).orElseThrow();
+        String filename = fichero.getName();
+        Path pathToFile = Path.of("C:\\tmp\\" + filename);
+        UrlResource resource = new UrlResource(pathToFile.toUri());
+        if (resource.exists() && resource.isReadable()) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getFicheroId(@RequestParam(value = "outputType", defaultValue = "simple") String outputType,
