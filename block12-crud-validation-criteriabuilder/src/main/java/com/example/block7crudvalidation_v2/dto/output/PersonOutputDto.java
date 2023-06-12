@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -20,9 +21,7 @@ public class PersonOutputDto {
     private String personalEmail;
     private String city;
     private Boolean active;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    private Date createdDate;
+    private LocalDate createdDate;
     private String imagenUrl;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    private Date terminationDate;
+    private LocalDate terminationDate;
 }

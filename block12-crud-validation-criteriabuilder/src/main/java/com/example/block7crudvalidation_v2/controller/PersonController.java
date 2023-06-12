@@ -7,13 +7,14 @@ import com.example.block7crudvalidation_v2.dto.output.PersonStudentOutputDto;
 import com.example.block7crudvalidation_v2.exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation_v2.exceptions.OutputTypeNotFoundException;
 import com.example.block7crudvalidation_v2.repository.PersonRepository;
-import com.example.block7crudvalidation_v2.repository.StudentRepository;
-import com.example.block7crudvalidation_v2.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/person")
@@ -95,7 +96,32 @@ public class PersonController {
     }
 
 
-    @GetMapping
+    @GetMapping("/findPersonCriteria")
+    public Iterable<PersonOutputDto> findPersonCriteria(
+            @RequestParam(required = false) String usuario,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) LocalDate createdDateMax,
+            @RequestParam(required = false) LocalDate createdDateMin,
+            @RequestParam(required = false, defaultValue = "x") String orderBy,
+            @RequestParam(defaultValue = "1", required = false) int pageNumber,
+            //Pongo 3 para pruebas RECORDAR poner 10 para cumplir requisitos ejercicio
+            @RequestParam(defaultValue = "10", required = false) int pageSize
+    ) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        if(usuario != null) data.put("usuario",usuario);
+        if(name != null) data.put("name",name);
+        if(surname != null) data.put("surname",surname);
+        if(createdDateMax != null) data.put("createdDateMax", createdDateMax);
+        if(createdDateMin != null) data.put("createdDateMin",createdDateMin);
+        if(!orderBy.equals("n") && !orderBy.equals("u")){
+            orderBy = "u";
+        }
+
+        return personRepository.getCustomQuery(data, orderBy, pageNumber, pageSize);
+    }
 
 
 

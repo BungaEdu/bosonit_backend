@@ -26,25 +26,26 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) {
-        if (personInputDto.getUsuario() == null || personInputDto.getUsuario().length() < 6 || personInputDto.getUsuario().length() > 10)
-            throw new UnprocessableEntityException("UnprocessableEntityException: " +
-                    "\n- USUARIO no puede ser nulo" +
-                    "\n- Tiene que tener igual o más de 6 dígitos" +
-                    "\n- Tiene que tener igual o menos de 10 dígitos");
-        if (personInputDto.getPassword() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: PASSWORD no puede ser nulo");
-        if (personInputDto.getName() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: NOMBRE no puede ser nulo");
-        if (personInputDto.getCompanyEmail() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: COMPANYMAIL no puede ser nulo");
-        if (personInputDto.getPersonalEmail() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: PERSONALMAIL no puede ser nulo");
-        if (personInputDto.getCity() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: CITY no puede ser nulo");
-        if (personInputDto.getActive() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: ACTIVE no puede ser nulo");
-        if (personInputDto.getCreatedDate() == null)
-            throw new UnprocessableEntityException("UnprocessableEntityException: CREATEDDATE no puede ser nulo");
+//        if (personInputDto.getUsuario() == null || personInputDto.getUsuario().length() < 6 || personInputDto.getUsuario().length() > 10)
+//            throw new UnprocessableEntityException("""
+//                    UnprocessableEntityException:\s
+//                    - USUARIO no puede ser nulo
+//                    - Tiene que tener igual o más de 6 dígitos
+//                    - Tiene que tener igual o menos de 10 dígitos""");
+//        if (personInputDto.getPassword() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: PASSWORD no puede ser nulo");
+//        if (personInputDto.getName() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: NOMBRE no puede ser nulo");
+//        if (personInputDto.getCompanyEmail() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: COMPANYMAIL no puede ser nulo");
+//        if (personInputDto.getPersonalEmail() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: PERSONALMAIL no puede ser nulo");
+//        if (personInputDto.getCity() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: CITY no puede ser nulo");
+//        if (personInputDto.getActive() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: ACTIVE no puede ser nulo");
+//        if (personInputDto.getCreatedDate() == null)
+//            throw new UnprocessableEntityException("UnprocessableEntityException: CREATEDDATE no puede ser nulo");
         return personRepository.save(new Person(personInputDto))
                 .personToPersonOutputDto();
     }
