@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
     @Autowired
     MongoTemplate mongoTemplate;
@@ -49,11 +49,12 @@ public class PersonServiceImpl implements PersonService{
         return mongoTemplate.save(person);
     }
 
-//    @Override
-//    public void deletePerson(Person person) {
-//        Optional<Person> personaOptional = Optional.ofNullable(mongoTemplate.findById(person.getIdPerson(), Person.class));
-//        personaOptional.ifPresent(persona -> mongoTemplate.remove(persona));
-//    }
+    @Override
+    public void deletePersonById(Person person) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(person.getIdPerson()));
+        mongoTemplate.remove(query, Person.class);
+    }
 
     @Override
     public Person getPersonById(String id) {
@@ -61,5 +62,14 @@ public class PersonServiceImpl implements PersonService{
         query.addCriteria(Criteria.where("_id").is(id));
         return mongoTemplate.findOne(query, Person.class);
     }
+
+    @Override
+    public Person getPersonByName(String name) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        return mongoTemplate.findOne(query, Person.class);
+    }
+
+
 
 }

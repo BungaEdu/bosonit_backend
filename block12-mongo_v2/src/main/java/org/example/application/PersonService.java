@@ -5,6 +5,7 @@ import org.example.controller.dto.PersonOutputDto;
 import org.example.domain.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonService {
     PersonOutputDto addPerson(PersonInputDto personInputDto);
@@ -14,6 +15,10 @@ public interface PersonService {
             int pageNumber, int pageSize);
     List<Person> findByName(String name);
     Person updateOnePerson(Person person,String id);
-//    void deletePerson(Person person);
+    void deletePersonById(Person person);
+
+    //    void deletePerson(Person person);
     Person getPersonById(String id);
+
+    Person getPersonByName(String name);
 }
